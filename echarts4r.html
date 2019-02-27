@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+<link rel="next" href="canvasxpress.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/echarts4r-4.3.2/plugins/leaflet/leaflet.css" rel="stylesheet" />
+<script src="libs/echarts4r-4.3.2/echarts.min.js"></script>
+<script src="libs/echarts4r-4.3.2/echarts-gl.min.js"></script>
+<script src="libs/echarts4r-4.3.2/ecStat.min.js"></script>
+<script src="libs/echarts4r-4.3.2/dataTool.min.js"></script>
+<script src="libs/echarts4r-4.3.2/world.js"></script>
+<script src="libs/echarts4r-4.3.2/plugins/echarts-wordcloud.min.js"></script>
+<script src="libs/echarts4r-4.3.2/plugins/echarts-liquidfill.min.js"></script>
+<script src="libs/echarts4r-4.3.2/plugins/echarts-graph-modularity.min.js"></script>
+<script src="libs/echarts4r-4.3.2/plugins/leaflet/leaflet.js"></script>
+<script src="libs/echarts4r-4.3.2/plugins/leaflet/echarts-leaflet.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/dark.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/vintage.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/westeros.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/essos.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/wonderland.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/walden.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/chalk.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/infographic.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/macarons.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/roma.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/shine.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/purple-passion.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/halloween.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/wef.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/weforum.js"></script>
+<script src="libs/echarts4r-4.3.2/themes/auritus.js"></script>
+<script src="libs/echarts4r-4.3.2/custom/renderers.js"></script>
+<link href="libs/mapbox-0.38.0/mapbox-gl.css" rel="stylesheet" />
+<script src="libs/mapbox-0.38.0/mapbox-gl.js"></script>
+<script src="libs/echarts4r-binding-0.2.1/echarts4r.js"></script>
+<link href="libs/canvasXpress-23.3/canvasXpress.css" rel="stylesheet" />
+<script src="libs/canvasXpress-23.3/canvasXpress.min.js"></script>
+<script src="libs/canvasXpress-binding-1.23.3/canvasXpress.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.0/DiagrammeR.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="echarts4r.html"><a href="echarts4r.html"><i class="fa fa-check"></i><b>1</b> echarts4r类型</a><ul>
+<li class="chapter" data-level="1.1" data-path="echarts4r.html"><a href="echarts4r.html#section-1.1"><i class="fa fa-check"></i><b>1.1</b> 线图和面积图</a></li>
+<li class="chapter" data-level="1.2" data-path="echarts4r.html"><a href="echarts4r.html#section-1.2"><i class="fa fa-check"></i><b>1.2</b> 柱形图和阶梯图</a></li>
+<li class="chapter" data-level="1.3" data-path="echarts4r.html"><a href="echarts4r.html#section-1.3"><i class="fa fa-check"></i><b>1.3</b> 散点图</a></li>
+<li class="chapter" data-level="1.4" data-path="echarts4r.html"><a href="echarts4r.html#section-1.4"><i class="fa fa-check"></i><b>1.4</b> 光晕散点图</a></li>
+<li class="chapter" data-level="1.5" data-path="echarts4r.html"><a href="echarts4r.html#section-1.5"><i class="fa fa-check"></i><b>1.5</b> 极坐标图</a></li>
+<li class="chapter" data-level="1.6" data-path="echarts4r.html"><a href="echarts4r.html#section-1.6"><i class="fa fa-check"></i><b>1.6</b> 径向图</a></li>
+<li class="chapter" data-level="1.7" data-path="echarts4r.html"><a href="echarts4r.html#section-1.7"><i class="fa fa-check"></i><b>1.7</b> 漏斗图</a></li>
+<li class="chapter" data-level="1.8" data-path="echarts4r.html"><a href="echarts4r.html#section-1.8"><i class="fa fa-check"></i><b>1.8</b> 旭日图</a></li>
+<li class="chapter" data-level="1.9" data-path="echarts4r.html"><a href="echarts4r.html#section-1.9"><i class="fa fa-check"></i><b>1.9</b> 日历图</a></li>
+<li class="chapter" data-level="1.10" data-path="echarts4r.html"><a href="echarts4r.html#section-1.10"><i class="fa fa-check"></i><b>1.10</b> 仪表图</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="canvasxpress.html"><a href="canvasxpress.html"><i class="fa fa-check"></i><b>2</b> canvasXpress</a><ul>
+<li class="chapter" data-level="2.1" data-path="canvasxpress.html"><a href="canvasxpress.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 气泡云图</a></li>
+<li class="chapter" data-level="2.2" data-path="canvasxpress.html"><a href="canvasxpress.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 韦恩图</a></li>
+<li class="chapter" data-level="2.3" data-path="canvasxpress.html"><a href="canvasxpress.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> 和弦图</a></li>
+<li class="chapter" data-level="2.4" data-path="canvasxpress.html"><a href="canvasxpress.html#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 流程图</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diagramer.html"><a href="diagramer.html"><i class="fa fa-check"></i><b>3</b> 流程图diagramer</a><ul>
+<li class="chapter" data-level="3.1" data-path="diagramer.html"><a href="diagramer.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 左右</a></li>
+<li class="chapter" data-level="3.2" data-path="diagramer.html"><a href="diagramer.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 上下</a></li>
+<li class="chapter" data-level="3.3" data-path="diagramer.html"><a href="diagramer.html#section-3.3"><i class="fa fa-check"></i><b>3.3</b> 节点形状</a></li>
+<li class="chapter" data-level="3.4" data-path="diagramer.html"><a href="diagramer.html#css"><i class="fa fa-check"></i><b>3.4</b> CSS样式</a></li>
+<li class="chapter" data-level="3.5" data-path="diagramer.html"><a href="diagramer.html#css"><i class="fa fa-check"></i><b>3.5</b> CSS类应用</a></li>
+<li class="chapter" data-level="3.6" data-path="diagramer.html"><a href="diagramer.html#css"><i class="fa fa-check"></i><b>3.6</b> CSS线条设置</a></li>
+<li class="chapter" data-level="3.7" data-path="diagramer.html"><a href="diagramer.html#section-3.7"><i class="fa fa-check"></i><b>3.7</b> 分块</a></li>
+<li class="chapter" data-level="3.8" data-path="diagramer.html"><a href="diagramer.html#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 序列流程图</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="diagramer.html"><a href="diagramer.html#section-3.8.1"><i class="fa fa-check"></i><b>3.8.1</b> 甘特图</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="echarts4r" class="section level1">
+<h1><span class="header-section-number">1</span> echarts4r类型</h1>
+<div id="section-1.1" class="section level2">
+<h2><span class="header-section-number">1.1</span> 线图和面积图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">x =</span> <span class="kw">seq</span>(<span class="dv">50</span>),
+  <span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dv">10</span>, <span class="dv">3</span>),
+  <span class="dt">z =</span> <span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dv">11</span>, <span class="dv">2</span>),
+  <span class="dt">w =</span> <span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="dv">9</span>, <span class="dv">2</span>)
+)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_line</span>(z) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_area</span>(w) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Line and area charts&quot;</span>)</code></pre></div>
+<div id="htmlwidget-fe13d5e115384edc4530" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fe13d5e115384edc4530">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["z","w"]},"series":[{"data":[{"value":[1,8.67745644084258]},{"value":[2,11.2425656594815]},{"value":[3,12.3299324776754]},{"value":[4,9.87571271647186]},{"value":[5,12.969065746002]},{"value":[6,7.04574801847712]},{"value":[7,13.0707453245058]},{"value":[8,11.7498885443458]},{"value":[9,13.980595239399]},{"value":[10,11.8259918383148]},{"value":[11,10.0377774573388]},{"value":[12,8.87728081872034]},{"value":[13,11.1513905333635]},{"value":[14,9.22044500999727]},{"value":[15,9.55324576526821]},{"value":[16,9.28171836355753]},{"value":[17,11.6194332134713]},{"value":[18,11.200753707153]},{"value":[19,10.0028939039227]},{"value":[20,12.5342372665864]},{"value":[21,11.6371256389709]},{"value":[22,12.8149696428253]},{"value":[23,11.2508588201858]},{"value":[24,13.734750952528]},{"value":[25,11.3853533883186]},{"value":[26,12.2347209162785]},{"value":[27,11.972796775713]},{"value":[28,9.60937027010315]},{"value":[29,8.65095883588736]},{"value":[30,11.0521353810368]},{"value":[31,11.7173446150027]},{"value":[32,10.9545836260011]},{"value":[33,11.4120439687218]},{"value":[34,14.4929399871519]},{"value":[35,11.6783020249811]},{"value":[36,12.4969671239347]},{"value":[37,8.48091682969941]},{"value":[38,9.24783483151319]},{"value":[39,10.4738514599424]},{"value":[40,12.6239003105977]},{"value":[41,11.0394655126158]},{"value":[42,13.6535646939217]},{"value":[43,11.1470371372038]},{"value":[44,12.0740882136162]},{"value":[45,12.6534641311228]},{"value":[46,11.1218679688877]},{"value":[47,8.57042603630489]},{"value":[48,12.4178914728837]},{"value":[49,10.4128890043173]},{"value":[50,12.8740815835335]}],"yAxisIndex":0,"xAxisIndex":0,"name":"z","type":"line","coordinateSystem":"cartesian2d"},{"data":[{"value":[1,11.5407334514043]},{"value":[2,7.56955768463214]},{"value":[3,11.4587019626548]},{"value":[4,12.0316578111382]},{"value":[5,10.581218445826]},{"value":[6,12.0204415171615]},{"value":[7,8.67803028178275]},{"value":[8,10.6630158329725]},{"value":[9,10.5396725869261]},{"value":[10,12.5455444699695]},{"value":[11,8.55259304487211]},{"value":[12,6.74730517374165]},{"value":[13,9.46134864159975]},{"value":[14,5.66574519022574]},{"value":[15,7.55898934363687]},{"value":[16,9.63949809488711]},{"value":[17,7.39782746096566]},{"value":[18,8.66979201881384]},{"value":[19,10.3608364103124]},{"value":[20,12.2967889990472]},{"value":[21,7.8179883311124]},{"value":[22,8.08644579141551]},{"value":[23,8.29717661812548]},{"value":[24,7.9414843284412]},{"value":[25,6.01102863900558]},{"value":[26,10.1889073227271]},{"value":[27,7.93067562894318]},{"value":[28,9.85149992562969]},{"value":[29,6.45684345764661]},{"value":[30,9.91070355493235]},{"value":[31,8.22348711793971]},{"value":[32,5.99110241067881]},{"value":[33,9.71793342450665]},{"value":[34,5.72063127863681]},{"value":[35,8.73078641622278]},{"value":[36,8.4657855620397]},{"value":[37,4.97527784475998]},{"value":[38,8.9607280082834]},{"value":[39,9.17713981844985]},{"value":[40,11.383569672582]},{"value":[41,10.2506024196774]},{"value":[42,6.28445260061399]},{"value":[43,10.0668051800373]},{"value":[44,8.96283051138652]},{"value":[45,6.42788107495172]},{"value":[46,9.64688365350931]},{"value":[47,12.2504991780455]},{"value":[48,8.94974031560665]},{"value":[49,9.65906160051667]},{"value":[50,5.61727682481035]}],"yAxisIndex":0,"xAxisIndex":0,"name":"w","type":"line","coordinateSystem":"cartesian2d","areaStyle":[]}],"title":{"text":"Line and area charts"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.2" class="section level2">
+<h2><span class="header-section-number">1.2</span> 柱形图和阶梯图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_bar</span>(y, <span class="dt">name =</span> <span class="st">&quot;Serie 1&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_step</span>(z, <span class="dt">name =</span> <span class="st">&quot;Serie 2&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Bar and step charts&quot;</span>)</code></pre></div>
+<div id="htmlwidget-c3a19050ea4fae5b81d6" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c3a19050ea4fae5b81d6">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["Serie 1","Serie 2"]},"series":[{"data":[{"value":[1,13.2136261404874]},{"value":[2,5.18808292566815]},{"value":[3,13.7584208873376]},{"value":[4,7.84531273618997]},{"value":[5,9.93386986037537]},{"value":[6,4.25665379319631]},{"value":[7,8.45716607084907]},{"value":[8,13.7882111546092]},{"value":[9,2.16826205693492]},{"value":[10,12.1552785504142]},{"value":[11,10.6685166530187]},{"value":[12,11.025179771385]},{"value":[13,8.01302576430755]},{"value":[14,16.8717073741397]},{"value":[15,7.47280355694309]},{"value":[16,8.76035578857963]},{"value":[17,12.7954014863274]},{"value":[18,9.56318686436338]},{"value":[19,6.3972763297741]},{"value":[20,6.36275320691384]},{"value":[21,10.5577130461845]},{"value":[22,10.0477149039779]},{"value":[23,8.21102538144763]},{"value":[24,12.6716047106043]},{"value":[25,6.64833087703269]},{"value":[26,16.1536896102315]},{"value":[27,11.0132513770356]},{"value":[28,10.8386144493383]},{"value":[29,2.05435547494135]},{"value":[30,14.6292483085696]},{"value":[31,7.87533069720958]},{"value":[32,5.81682411206494]},{"value":[33,6.73430121765671]},{"value":[34,13.8589057058388]},{"value":[35,10.5754025186197]},{"value":[36,6.69919774429749]},{"value":[37,10.0680447153751]},{"value":[38,9.17816715092759]},{"value":[39,6.36625876598007]},{"value":[40,12.5905002357513]},{"value":[41,13.4930348319101]},{"value":[42,7.18951166604036]},{"value":[43,8.74615782368179]},{"value":[44,11.3290280366225]},{"value":[45,12.598900507516]},{"value":[46,5.54408289300877]},{"value":[47,9.00668586174698]},{"value":[48,8.93252739136849]},{"value":[49,8.46525619109488]},{"value":[50,10.7562487392562]}],"name":"Serie 1","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"cartesian2d"},{"data":[{"value":[1,8.67745644084258]},{"value":[2,11.2425656594815]},{"value":[3,12.3299324776754]},{"value":[4,9.87571271647186]},{"value":[5,12.969065746002]},{"value":[6,7.04574801847712]},{"value":[7,13.0707453245058]},{"value":[8,11.7498885443458]},{"value":[9,13.980595239399]},{"value":[10,11.8259918383148]},{"value":[11,10.0377774573388]},{"value":[12,8.87728081872034]},{"value":[13,11.1513905333635]},{"value":[14,9.22044500999727]},{"value":[15,9.55324576526821]},{"value":[16,9.28171836355753]},{"value":[17,11.6194332134713]},{"value":[18,11.200753707153]},{"value":[19,10.0028939039227]},{"value":[20,12.5342372665864]},{"value":[21,11.6371256389709]},{"value":[22,12.8149696428253]},{"value":[23,11.2508588201858]},{"value":[24,13.734750952528]},{"value":[25,11.3853533883186]},{"value":[26,12.2347209162785]},{"value":[27,11.972796775713]},{"value":[28,9.60937027010315]},{"value":[29,8.65095883588736]},{"value":[30,11.0521353810368]},{"value":[31,11.7173446150027]},{"value":[32,10.9545836260011]},{"value":[33,11.4120439687218]},{"value":[34,14.4929399871519]},{"value":[35,11.6783020249811]},{"value":[36,12.4969671239347]},{"value":[37,8.48091682969941]},{"value":[38,9.24783483151319]},{"value":[39,10.4738514599424]},{"value":[40,12.6239003105977]},{"value":[41,11.0394655126158]},{"value":[42,13.6535646939217]},{"value":[43,11.1470371372038]},{"value":[44,12.0740882136162]},{"value":[45,12.6534641311228]},{"value":[46,11.1218679688877]},{"value":[47,8.57042603630489]},{"value":[48,12.4178914728837]},{"value":[49,10.4128890043173]},{"value":[50,12.8740815835335]}],"yAxisIndex":0,"xAxisIndex":0,"name":"Serie 2","type":"line","coordinateSystem":"cartesian2d","step":"start"}],"title":{"text":"Bar and step charts"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.3" class="section level2">
+<h2><span class="header-section-number">1.3</span> 散点图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_scatter</span>(y, z) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_visual_map</span>(z, <span class="dt">scale =</span> e_scale) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># scale color</span>
+<span class="st">  </span><span class="kw">e_legend</span>(<span class="ot">FALSE</span>) <span class="co"># hide legend</span></code></pre></div>
+<div id="htmlwidget-80cfc8e92a56ad8e2db2" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-80cfc8e92a56ad8e2db2">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["y"],"show":false,"type":"plain"},"series":[{"data":[{"value":[1,13.2136261404874,8.67745644084258,5.16297312535381]},{"value":[2,5.18808292566815,11.2425656594815,11.707329086519]},{"value":[3,13.7584208873376,12.3299324776754,14.4815250025887]},{"value":[4,7.84531273618997,9.87571271647186,8.22008100342663]},{"value":[5,9.93386986037537,12.969065746002,16.1121439189917]},{"value":[6,4.25665379319631,7.04574801847712,1]},{"value":[7,8.45716607084907,13.0707453245058,16.3715587426862]},{"value":[8,13.7882111546092,11.7498885443458,13.0016605409744]},{"value":[9,2.16826205693492,13.980595239399,18.6928562808302]},{"value":[10,12.1552785504142,11.8259918383148,13.1958226616089]},{"value":[11,10.6685166530187,10.0377774573388,8.63355632263732]},{"value":[12,11.025179771385,8.87728081872034,5.67278450065436]},{"value":[13,8.01302576430755,11.1513905333635,11.4747142427593]},{"value":[14,16.8717073741397,9.22044500999727,6.54829834019112]},{"value":[15,7.47280355694309,9.55324576526821,7.39737197448781]},{"value":[16,8.76035578857963,9.28171836355753,6.7046248754197]},{"value":[17,12.7954014863274,11.6194332134713,12.6688302208965]},{"value":[18,9.56318686436338,11.200753707153,11.6006543697153]},{"value":[19,6.3972763297741,10.0028939039227,8.54455801056312]},{"value":[20,6.36275320691384,12.5342372665864,15.0027672380027]},{"value":[21,10.5577130461845,11.6371256389709,12.713968856493]},{"value":[22,10.0477149039779,12.8149696428253,15.718998962789]},{"value":[23,8.21102538144763,11.2508588201858,11.7284874041836]},{"value":[24,12.6716047106043,13.734750952528,18.0656344406794]},{"value":[25,6.64833087703269,11.3853533883186,12.0716230189594]},{"value":[26,16.1536896102315,12.2347209162785,14.2386120128134]},{"value":[27,11.0132513770356,11.972796775713,13.5703656869933]},{"value":[28,10.8386144493383,9.60937027010315,7.54056226639238]},{"value":[29,2.05435547494135,8.65095883588736,5.09536986008727]},{"value":[30,14.6292483085696,11.0521353810368,11.2214848507766]},{"value":[31,7.87533069720958,11.7173446150027,12.918631305241]},{"value":[32,5.81682411206494,10.9545836260011,10.9726013315286]},{"value":[33,6.73430121765671,11.4120439687218,12.1397186219455]},{"value":[34,13.8589057058388,14.4929399871519,20]},{"value":[35,10.5754025186197,11.6783020249811,12.81902205473]},{"value":[36,6.69919774429749,12.4969671239347,14.9076800274996]},{"value":[37,10.0680447153751,8.48091682969941,4.66154216621811]},{"value":[38,9.17816715092759,9.24783483151319,6.61817791506867]},{"value":[39,6.36625876598007,10.4738514599424,9.74611070344562]},{"value":[40,12.5905002357513,12.6239003105977,15.231524310921]},{"value":[41,13.4930348319101,11.0394655126158,11.1891602509796]},{"value":[42,7.18951166604036,13.6535646939217,17.8585041666097]},{"value":[43,8.74615782368179,11.1470371372038,11.463607435337]},{"value":[44,11.3290280366225,12.0740882136162,13.8287902486611]},{"value":[45,12.598900507516,12.6534641311228,15.3069504033785]},{"value":[46,5.54408289300877,11.1218679688877,11.3993934067449]},{"value":[47,9.00668586174698,8.57042603630489,4.88990675419405]},{"value":[48,8.93252739136849,12.4178914728837,14.7059345405713]},{"value":[49,8.46525619109488,10.4128890043173,9.59057736124782]},{"value":[50,10.7562487392562,12.8740815835335,15.8698110914652]}],"name":"y","type":"scatter","symbol":null,"coordinateSystem":"cartesian2d","yAxisIndex":0,"xAxisIndex":0,"symbolSize":"function(data){ return data[3];}"}],"visualMap":[{"calculable":true,"type":"continuous","min":1,"max":20}]},"dispose":true},"evals":["opts.series.0.symbolSize"],"jsHooks":[]}</script>
+</div>
+<div id="section-1.4" class="section level2">
+<h2><span class="header-section-number">1.4</span> 光晕散点图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_scatter</span>(y, z) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_visual_map</span>(z, <span class="dt">scale =</span> e_scale) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># scale color</span>
+<span class="st">  </span><span class="kw">e_legend</span>(<span class="ot">FALSE</span>) <span class="co"># hide legend</span></code></pre></div>
+<div id="htmlwidget-9212a2dffb62e5064b73" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9212a2dffb62e5064b73">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"yAxis":[{"show":true}],"xAxis":[{"type":"value"}],"legend":{"data":["y"],"show":false,"type":"plain"},"series":[{"data":[{"value":[1,13.2136261404874,8.67745644084258,5.16297312535381]},{"value":[2,5.18808292566815,11.2425656594815,11.707329086519]},{"value":[3,13.7584208873376,12.3299324776754,14.4815250025887]},{"value":[4,7.84531273618997,9.87571271647186,8.22008100342663]},{"value":[5,9.93386986037537,12.969065746002,16.1121439189917]},{"value":[6,4.25665379319631,7.04574801847712,1]},{"value":[7,8.45716607084907,13.0707453245058,16.3715587426862]},{"value":[8,13.7882111546092,11.7498885443458,13.0016605409744]},{"value":[9,2.16826205693492,13.980595239399,18.6928562808302]},{"value":[10,12.1552785504142,11.8259918383148,13.1958226616089]},{"value":[11,10.6685166530187,10.0377774573388,8.63355632263732]},{"value":[12,11.025179771385,8.87728081872034,5.67278450065436]},{"value":[13,8.01302576430755,11.1513905333635,11.4747142427593]},{"value":[14,16.8717073741397,9.22044500999727,6.54829834019112]},{"value":[15,7.47280355694309,9.55324576526821,7.39737197448781]},{"value":[16,8.76035578857963,9.28171836355753,6.7046248754197]},{"value":[17,12.7954014863274,11.6194332134713,12.6688302208965]},{"value":[18,9.56318686436338,11.200753707153,11.6006543697153]},{"value":[19,6.3972763297741,10.0028939039227,8.54455801056312]},{"value":[20,6.36275320691384,12.5342372665864,15.0027672380027]},{"value":[21,10.5577130461845,11.6371256389709,12.713968856493]},{"value":[22,10.0477149039779,12.8149696428253,15.718998962789]},{"value":[23,8.21102538144763,11.2508588201858,11.7284874041836]},{"value":[24,12.6716047106043,13.734750952528,18.0656344406794]},{"value":[25,6.64833087703269,11.3853533883186,12.0716230189594]},{"value":[26,16.1536896102315,12.2347209162785,14.2386120128134]},{"value":[27,11.0132513770356,11.972796775713,13.5703656869933]},{"value":[28,10.8386144493383,9.60937027010315,7.54056226639238]},{"value":[29,2.05435547494135,8.65095883588736,5.09536986008727]},{"value":[30,14.6292483085696,11.0521353810368,11.2214848507766]},{"value":[31,7.87533069720958,11.7173446150027,12.918631305241]},{"value":[32,5.81682411206494,10.9545836260011,10.9726013315286]},{"value":[33,6.73430121765671,11.4120439687218,12.1397186219455]},{"value":[34,13.8589057058388,14.4929399871519,20]},{"value":[35,10.5754025186197,11.6783020249811,12.81902205473]},{"value":[36,6.69919774429749,12.4969671239347,14.9076800274996]},{"value":[37,10.0680447153751,8.48091682969941,4.66154216621811]},{"value":[38,9.17816715092759,9.24783483151319,6.61817791506867]},{"value":[39,6.36625876598007,10.4738514599424,9.74611070344562]},{"value":[40,12.5905002357513,12.6239003105977,15.231524310921]},{"value":[41,13.4930348319101,11.0394655126158,11.1891602509796]},{"value":[42,7.18951166604036,13.6535646939217,17.8585041666097]},{"value":[43,8.74615782368179,11.1470371372038,11.463607435337]},{"value":[44,11.3290280366225,12.0740882136162,13.8287902486611]},{"value":[45,12.598900507516,12.6534641311228,15.3069504033785]},{"value":[46,5.54408289300877,11.1218679688877,11.3993934067449]},{"value":[47,9.00668586174698,8.57042603630489,4.88990675419405]},{"value":[48,8.93252739136849,12.4178914728837,14.7059345405713]},{"value":[49,8.46525619109488,10.4128890043173,9.59057736124782]},{"value":[50,10.7562487392562,12.8740815835335,15.8698110914652]}],"name":"y","type":"scatter","symbol":null,"coordinateSystem":"cartesian2d","yAxisIndex":0,"xAxisIndex":0,"symbolSize":"function(data){ return data[3];}"}],"visualMap":[{"calculable":true,"type":"continuous","min":1,"max":20}]},"dispose":true},"evals":["opts.series.0.symbolSize"],"jsHooks":[]}</script>
+</div>
+<div id="section-1.5" class="section level2">
+<h2><span class="header-section-number">1.5</span> 极坐标图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_polar</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_angle_axis</span>(x) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># angle = x</span>
+<span class="st">  </span><span class="kw">e_radius_axis</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_bar</span>(y, <span class="dt">coord_system =</span> <span class="st">&quot;polar&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_scatter</span>(z, <span class="dt">coord_system =</span> <span class="st">&quot;polar&quot;</span>)</code></pre></div>
+<div id="htmlwidget-0f847fbeb739a65961a0" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f847fbeb739a65961a0">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"polar":{"show":true},"angleAxis":{"show":true,"data":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]},"radiusAxis":{"show":true},"legend":{"data":["y","z"]},"series":[{"data":[13.2136261404874,5.18808292566815,13.7584208873376,7.84531273618997,9.93386986037537,4.25665379319631,8.45716607084907,13.7882111546092,2.16826205693492,12.1552785504142,10.6685166530187,11.025179771385,8.01302576430755,16.8717073741397,7.47280355694309,8.76035578857963,12.7954014863274,9.56318686436338,6.3972763297741,6.36275320691384,10.5577130461845,10.0477149039779,8.21102538144763,12.6716047106043,6.64833087703269,16.1536896102315,11.0132513770356,10.8386144493383,2.05435547494135,14.6292483085696,7.87533069720958,5.81682411206494,6.73430121765671,13.8589057058388,10.5754025186197,6.69919774429749,10.0680447153751,9.17816715092759,6.36625876598007,12.5905002357513,13.4930348319101,7.18951166604036,8.74615782368179,11.3290280366225,12.598900507516,5.54408289300877,9.00668586174698,8.93252739136849,8.46525619109488,10.7562487392562],"name":"y","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"polar"},{"data":[8.67745644084258,11.2425656594815,12.3299324776754,9.87571271647186,12.969065746002,7.04574801847712,13.0707453245058,11.7498885443458,13.980595239399,11.8259918383148,10.0377774573388,8.87728081872034,11.1513905333635,9.22044500999727,9.55324576526821,9.28171836355753,11.6194332134713,11.200753707153,10.0028939039227,12.5342372665864,11.6371256389709,12.8149696428253,11.2508588201858,13.734750952528,11.3853533883186,12.2347209162785,11.972796775713,9.60937027010315,8.65095883588736,11.0521353810368,11.7173446150027,10.9545836260011,11.4120439687218,14.4929399871519,11.6783020249811,12.4969671239347,8.48091682969941,9.24783483151319,10.4738514599424,12.6239003105977,11.0394655126158,13.6535646939217,11.1470371372038,12.0740882136162,12.6534641311228,11.1218679688877,8.57042603630489,12.4178914728837,10.4128890043173,12.8740815835335],"name":"z","type":"scatter","symbol":null,"coordinateSystem":"polar","symbolSize":3}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.6" class="section level2">
+<h2><span class="header-section-number">1.6</span> 径向图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_polar</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_angle_axis</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_radius_axis</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_bar</span>(y, <span class="dt">coord_system =</span> <span class="st">&quot;polar&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_scatter</span>(z, <span class="dt">coord_system =</span> <span class="st">&quot;polar&quot;</span>)</code></pre></div>
+<div id="htmlwidget-0c17aab504d35f26256b" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0c17aab504d35f26256b">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"polar":{"show":true},"angleAxis":{"show":true},"radiusAxis":{"show":true,"data":[1,2,3,4,5,6,7,8,9,10]},"legend":{"data":["y","z"]},"series":[{"data":[13.2136261404874,5.18808292566815,13.7584208873376,7.84531273618997,9.93386986037537,4.25665379319631,8.45716607084907,13.7882111546092,2.16826205693492,12.1552785504142],"name":"y","type":"bar","yAxisIndex":0,"xAxisIndex":0,"coordinateSystem":"polar"},{"data":[8.67745644084258,11.2425656594815,12.3299324776754,9.87571271647186,12.969065746002,7.04574801847712,13.0707453245058,11.7498885443458,13.980595239399,11.8259918383148],"name":"z","type":"scatter","symbol":null,"coordinateSystem":"polar","symbolSize":3}]},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.7" class="section level2">
+<h2><span class="header-section-number">1.7</span> 漏斗图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+funnel &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">stage =</span> <span class="kw">c</span>(<span class="st">&quot;View&quot;</span>, <span class="st">&quot;Click&quot;</span>, <span class="st">&quot;Purchase&quot;</span>), <span class="dt">value =</span> <span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">30</span>, <span class="dv">20</span>))
+
+funnel <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_funnel</span>(value, stage) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Funnel&quot;</span>)</code></pre></div>
+<div id="htmlwidget-092888c91590c316971a" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-092888c91590c316971a">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"legend":{"data":["View","Click","Purchase"]},"series":[{"data":[{"value":80,"name":"View"},{"value":30,"name":"Click"},{"value":20,"name":"Purchase"}],"name":null,"type":"funnel"}],"title":{"text":"Funnel"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.8" class="section level2">
+<h2><span class="header-section-number">1.8</span> 旭日图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">parent =</span> <span class="kw">c</span>(<span class="st">&quot;earth&quot;</span>, <span class="st">&quot;earth&quot;</span>, <span class="st">&quot;earth&quot;</span>, <span class="st">&quot;mars&quot;</span>, <span class="st">&quot;mars&quot;</span>), 
+  <span class="dt">child =</span> <span class="kw">c</span>(<span class="st">&quot;forest&quot;</span>, <span class="st">&quot;ocean&quot;</span>, <span class="st">&quot;iceberg&quot;</span>, <span class="st">&quot;elon&quot;</span>, <span class="st">&quot;curiosity&quot;</span>),
+  <span class="dt">value =</span> <span class="kw">ceiling</span>(<span class="kw">rnorm</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">2</span>))
+)
+
+df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_sunburst</span>(parent, child, value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Sunburst&quot;</span>)</code></pre></div>
+<div id="htmlwidget-19dd0e4d34dc435dcadc" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-19dd0e4d34dc435dcadc">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"series":[{"type":"sunburst","data":[{"name":"earth","children":[{"name":"forest","value":16,"colname":"name"},{"name":"ocean","value":12,"colname":"name"},{"name":"iceberg","value":8,"colname":"name"}]},{"name":"mars","children":[{"name":"elon","value":9,"colname":"name"},{"name":"curiosity","value":9,"colname":"name"}]}]}],"title":{"text":"Sunburst"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.9" class="section level2">
+<h2><span class="header-section-number">1.9</span> 日历图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+dates &lt;-<span class="st"> </span><span class="kw">seq.Date</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2018-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>)
+values &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(dates), <span class="dv">20</span>, <span class="dv">6</span>)
+
+year &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">date =</span> dates, <span class="dt">values =</span> values)
+
+year <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_charts</span>(date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_calendar</span>(<span class="dt">range =</span> <span class="st">&quot;2018&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_heatmap</span>(values, <span class="dt">coord_system =</span> <span class="st">&quot;calendar&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_visual_map</span>(<span class="dt">max =</span> <span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Calendar&quot;</span>, <span class="st">&quot;Heatmap&quot;</span>)</code></pre></div>
+<div id="htmlwidget-d37c5f6c9f9c9a64100a" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d37c5f6c9f9c9a64100a">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"calendar":[{"range":"2018"}],"series":[{"data":[{"value":["2017-01-01","24.319113"]},{"value":["2017-01-02","20.997069"]},{"value":["2017-01-03","28.289179"]},{"value":["2017-01-04","22.829268"]},{"value":["2017-01-05","20.089991"]},{"value":["2017-01-06","20.000643"]},{"value":["2017-01-07","24.704982"]},{"value":["2017-01-08","14.162831"]},{"value":["2017-01-09","22.772107"]},{"value":["2017-01-10","14.442402"]},{"value":["2017-01-11","21.082850"]},{"value":["2017-01-12","22.046968"]},{"value":["2017-01-13","32.647158"]},{"value":["2017-01-14","27.582650"]},{"value":["2017-01-15","16.771028"]},{"value":["2017-01-16","10.793017"]},{"value":["2017-01-17","19.952208"]},{"value":["2017-01-18","23.447043"]},{"value":["2017-01-19","22.348405"]},{"value":["2017-01-20","18.207432"]},{"value":["2017-01-21","10.102192"]},{"value":["2017-01-22","22.586551"]},{"value":["2017-01-23"," 7.088047"]},{"value":["2017-01-24","18.061449"]},{"value":["2017-01-25","13.731876"]},{"value":["2017-01-26"," 9.346699"]},{"value":["2017-01-27","20.476829"]},{"value":["2017-01-28","11.776133"]},{"value":["2017-01-29","24.301065"]},{"value":["2017-01-30","21.421048"]},{"value":["2017-01-31","12.346526"]},{"value":["2017-02-01","10.596924"]},{"value":["2017-02-02","15.017153"]},{"value":["2017-02-03","16.193169"]},{"value":["2017-02-04","24.856012"]},{"value":["2017-02-05","25.667588"]},{"value":["2017-02-06","18.036248"]},{"value":["2017-02-07","21.881860"]},{"value":["2017-02-08","21.583921"]},{"value":["2017-02-09","10.940665"]},{"value":["2017-02-10","11.471185"]},{"value":["2017-02-11","11.417678"]},{"value":["2017-02-12","16.451260"]},{"value":["2017-02-13"," 8.700105"]},{"value":["2017-02-14","24.800091"]},{"value":["2017-02-15","16.555920"]},{"value":["2017-02-16","14.971613"]},{"value":["2017-02-17"," 5.754832"]},{"value":["2017-02-18"," 7.781896"]},{"value":["2017-02-19","14.919272"]},{"value":["2017-02-20","21.579614"]},{"value":["2017-02-21","22.131217"]},{"value":["2017-02-22","16.447162"]},{"value":["2017-02-23","31.556134"]},{"value":["2017-02-24","17.313221"]},{"value":["2017-02-25","29.536069"]},{"value":["2017-02-26","19.571039"]},{"value":["2017-02-27","12.246463"]},{"value":["2017-02-28","19.109299"]},{"value":["2017-03-01","17.269060"]},{"value":["2017-03-02","12.794529"]},{"value":["2017-03-03","14.939488"]},{"value":["2017-03-04","26.590311"]},{"value":["2017-03-05","15.074770"]},{"value":["2017-03-06","15.205130"]},{"value":["2017-03-07"," 5.036512"]},{"value":["2017-03-08","16.857672"]},{"value":["2017-03-09","26.004237"]},{"value":["2017-03-10","22.511935"]},{"value":["2017-03-11","20.296201"]},{"value":["2017-03-12","16.060558"]},{"value":["2017-03-13","21.407834"]},{"value":["2017-03-14","17.192195"]},{"value":["2017-03-15","17.286667"]},{"value":["2017-03-16","25.855717"]},{"value":["2017-03-17","13.782577"]},{"value":["2017-03-18","15.894293"]},{"value":["2017-03-19","36.879830"]},{"value":["2017-03-20","21.230084"]},{"value":["2017-03-21","25.086812"]},{"value":["2017-03-22","15.594533"]},{"value":["2017-03-23","19.497048"]},{"value":["2017-03-24","20.747082"]},{"value":["2017-03-25"," 9.750269"]},{"value":["2017-03-26"," 6.805363"]},{"value":["2017-03-27","10.098011"]},{"value":["2017-03-28","20.333940"]},{"value":["2017-03-29","28.649004"]},{"value":["2017-03-30","19.235803"]},{"value":["2017-03-31","20.242233"]},{"value":["2017-04-01","25.369684"]},{"value":["2017-04-02","17.218019"]},{"value":["2017-04-03","22.740631"]},{"value":["2017-04-04","23.083677"]},{"value":["2017-04-05","25.070068"]},{"value":["2017-04-06","27.784190"]},{"value":["2017-04-07","24.412734"]},{"value":["2017-04-08","23.647176"]},{"value":["2017-04-09","14.398294"]},{"value":["2017-04-10","21.572024"]},{"value":["2017-04-11","20.804252"]},{"value":["2017-04-12","27.719425"]},{"value":["2017-04-13","22.552376"]},{"value":["2017-04-14","29.865512"]},{"value":["2017-04-15","31.154370"]},{"value":["2017-04-16","17.530726"]},{"value":["2017-04-17","18.870970"]},{"value":["2017-04-18","16.517863"]},{"value":["2017-04-19","29.802047"]},{"value":["2017-04-20","17.858621"]},{"value":["2017-04-21","16.557818"]},{"value":["2017-04-22","15.511958"]},{"value":["2017-04-23","13.626825"]},{"value":["2017-04-24","24.174204"]},{"value":["2017-04-25","23.124210"]},{"value":["2017-04-26","16.990657"]},{"value":["2017-04-27"," 9.940278"]},{"value":["2017-04-28","20.307481"]},{"value":["2017-04-29","10.804463"]},{"value":["2017-04-30","30.113256"]},{"value":["2017-05-01","16.275612"]},{"value":["2017-05-02","15.968218"]},{"value":["2017-05-03","14.554215"]},{"value":["2017-05-04","21.490751"]},{"value":["2017-05-05","28.221978"]},{"value":["2017-05-06","19.581669"]},{"value":["2017-05-07","24.943986"]},{"value":["2017-05-08","23.267625"]},{"value":["2017-05-09","21.098683"]},{"value":["2017-05-10","12.763820"]},{"value":["2017-05-11","14.935897"]},{"value":["2017-05-12","15.888801"]},{"value":["2017-05-13"," 8.596862"]},{"value":["2017-05-14","20.000109"]},{"value":["2017-05-15","11.982497"]},{"value":["2017-05-16","15.022028"]},{"value":["2017-05-17","20.573164"]},{"value":["2017-05-18","27.707672"]},{"value":["2017-05-19","18.404437"]},{"value":["2017-05-20"," 9.819966"]},{"value":["2017-05-21","25.707847"]},{"value":["2017-05-22","10.488230"]},{"value":["2017-05-23","27.389535"]},{"value":["2017-05-24","21.940983"]},{"value":["2017-05-25","15.261220"]},{"value":["2017-05-26","15.804756"]},{"value":["2017-05-27","18.696837"]},{"value":["2017-05-28","13.370529"]},{"value":["2017-05-29","24.869469"]},{"value":["2017-05-30","22.234345"]},{"value":["2017-05-31","21.679038"]},{"value":["2017-06-01","27.497416"]},{"value":["2017-06-02","15.943724"]},{"value":["2017-06-03","21.170992"]},{"value":["2017-06-04","13.184914"]},{"value":["2017-06-05","15.608344"]},{"value":["2017-06-06","17.663772"]},{"value":["2017-06-07","17.499481"]},{"value":["2017-06-08","16.028329"]},{"value":["2017-06-09"," 9.698259"]},{"value":["2017-06-10","21.775766"]},{"value":["2017-06-11","23.198843"]},{"value":["2017-06-12","18.108409"]},{"value":["2017-06-13","15.339569"]},{"value":["2017-06-14","16.485867"]},{"value":["2017-06-15","15.898710"]},{"value":["2017-06-16","23.956250"]},{"value":["2017-06-17","10.975418"]},{"value":["2017-06-18","20.948785"]},{"value":["2017-06-19","18.019193"]},{"value":["2017-06-20","20.642322"]},{"value":["2017-06-21"," 8.503319"]},{"value":["2017-06-22","16.764941"]},{"value":["2017-06-23","19.892500"]},{"value":["2017-06-24","15.188867"]},{"value":["2017-06-25","25.664049"]},{"value":["2017-06-26"," 4.698717"]},{"value":["2017-06-27"," 9.919755"]},{"value":["2017-06-28","16.979234"]},{"value":["2017-06-29","25.965815"]},{"value":["2017-06-30","10.910002"]},{"value":["2017-07-01","22.670036"]},{"value":["2017-07-02"," 9.499211"]},{"value":["2017-07-03","21.066026"]},{"value":["2017-07-04","16.291746"]},{"value":["2017-07-05","20.851070"]},{"value":["2017-07-06","26.840133"]},{"value":["2017-07-07","15.257955"]},{"value":["2017-07-08","20.397580"]},{"value":["2017-07-09","24.213139"]},{"value":["2017-07-10","22.339371"]},{"value":["2017-07-11","23.408290"]},{"value":["2017-07-12","26.741758"]},{"value":["2017-07-13"," 9.390105"]},{"value":["2017-07-14","18.571456"]},{"value":["2017-07-15","19.044425"]},{"value":["2017-07-16","27.352078"]},{"value":["2017-07-17","18.386985"]},{"value":["2017-07-18","23.071276"]},{"value":["2017-07-19"," 5.993781"]},{"value":["2017-07-20"," 9.189485"]},{"value":["2017-07-21","19.226430"]},{"value":["2017-07-22","12.217176"]},{"value":["2017-07-23","23.234967"]},{"value":["2017-07-24","25.130729"]},{"value":["2017-07-25","20.861278"]},{"value":["2017-07-26","19.144093"]},{"value":["2017-07-27","22.556271"]},{"value":["2017-07-28","25.655151"]},{"value":["2017-07-29","20.385926"]},{"value":["2017-07-30","21.680284"]},{"value":["2017-07-31","20.294995"]},{"value":["2017-08-01","14.360869"]},{"value":["2017-08-02","19.213706"]},{"value":["2017-08-03","29.432141"]},{"value":["2017-08-04","18.201956"]},{"value":["2017-08-05","22.255370"]},{"value":["2017-08-06","28.481239"]},{"value":["2017-08-07","21.234485"]},{"value":["2017-08-08","29.125718"]},{"value":["2017-08-09","10.735188"]},{"value":["2017-08-10","19.996102"]},{"value":["2017-08-11","21.515162"]},{"value":["2017-08-12","17.825824"]},{"value":["2017-08-13","22.088795"]},{"value":["2017-08-14","18.149071"]},{"value":["2017-08-15","21.690308"]},{"value":["2017-08-16","24.936846"]},{"value":["2017-08-17","27.563943"]},{"value":["2017-08-18","22.700935"]},{"value":["2017-08-19","21.444707"]},{"value":["2017-08-20","20.793579"]},{"value":["2017-08-21","22.118509"]},{"value":["2017-08-22","21.547777"]},{"value":["2017-08-23","26.696237"]},{"value":["2017-08-24","23.905924"]},{"value":["2017-08-25","15.888899"]},{"value":["2017-08-26","16.827926"]},{"value":["2017-08-27"," 7.397146"]},{"value":["2017-08-28","12.014065"]},{"value":["2017-08-29","12.292082"]},{"value":["2017-08-30","21.351894"]},{"value":["2017-08-31","19.110445"]},{"value":["2017-09-01","23.649106"]},{"value":["2017-09-02","17.864163"]},{"value":["2017-09-03","28.155966"]},{"value":["2017-09-04","19.701596"]},{"value":["2017-09-05","15.839156"]},{"value":["2017-09-06","22.315738"]},{"value":["2017-09-07","19.682449"]},{"value":["2017-09-08","21.093638"]},{"value":["2017-09-09","22.676495"]},{"value":["2017-09-10","14.657994"]},{"value":["2017-09-11","31.514630"]},{"value":["2017-09-12","24.525449"]},{"value":["2017-09-13","11.449907"]},{"value":["2017-09-14","24.569389"]},{"value":["2017-09-15","14.969922"]},{"value":["2017-09-16","24.996488"]},{"value":["2017-09-17","22.262731"]},{"value":["2017-09-18","11.806072"]},{"value":["2017-09-19","18.730215"]},{"value":["2017-09-20","20.825413"]},{"value":["2017-09-21","28.062673"]},{"value":["2017-09-22","26.533019"]},{"value":["2017-09-23","15.064425"]},{"value":["2017-09-24","13.040777"]},{"value":["2017-09-25","16.757828"]},{"value":["2017-09-26","17.753498"]},{"value":["2017-09-27","11.105712"]},{"value":["2017-09-28","17.144580"]},{"value":["2017-09-29","30.945420"]},{"value":["2017-09-30","15.911008"]},{"value":["2017-10-01","17.790547"]},{"value":["2017-10-02","23.374313"]},{"value":["2017-10-03","23.942420"]},{"value":["2017-10-04","31.813678"]},{"value":["2017-10-05","17.574923"]},{"value":["2017-10-06","18.435332"]},{"value":["2017-10-07","24.252473"]},{"value":["2017-10-08","22.965588"]},{"value":["2017-10-09","30.113691"]},{"value":["2017-10-10","18.609892"]},{"value":["2017-10-11","17.295889"]},{"value":["2017-10-12","16.142958"]},{"value":["2017-10-13","26.843757"]},{"value":["2017-10-14","13.512826"]},{"value":["2017-10-15","27.808812"]},{"value":["2017-10-16","26.998685"]},{"value":["2017-10-17","17.572431"]},{"value":["2017-10-18","29.597275"]},{"value":["2017-10-19","11.183991"]},{"value":["2017-10-20","27.043209"]},{"value":["2017-10-21","23.323704"]},{"value":["2017-10-22","20.434520"]},{"value":["2017-10-23","21.263349"]},{"value":["2017-10-24","14.356838"]},{"value":["2017-10-25","26.728806"]},{"value":["2017-10-26","23.314052"]},{"value":["2017-10-27","29.963361"]},{"value":["2017-10-28","16.569626"]},{"value":["2017-10-29","25.391115"]},{"value":["2017-10-30","12.843068"]},{"value":["2017-10-31","18.979520"]},{"value":["2017-11-01","27.757729"]},{"value":["2017-11-02","19.658048"]},{"value":["2017-11-03","25.434458"]},{"value":["2017-11-04","17.770772"]},{"value":["2017-11-05","10.677196"]},{"value":["2017-11-06","20.221625"]},{"value":["2017-11-07","14.992366"]},{"value":["2017-11-08","20.708188"]},{"value":["2017-11-09","13.312019"]},{"value":["2017-11-10","33.683254"]},{"value":["2017-11-11","11.390424"]},{"value":["2017-11-12","13.133314"]},{"value":["2017-11-13","32.660666"]},{"value":["2017-11-14","30.505249"]},{"value":["2017-11-15"," 7.229430"]},{"value":["2017-11-16","12.563981"]},{"value":["2017-11-17","18.067390"]},{"value":["2017-11-18","17.284089"]},{"value":["2017-11-19","19.329116"]},{"value":["2017-11-20","16.374563"]},{"value":["2017-11-21","13.464936"]},{"value":["2017-11-22","25.670684"]},{"value":["2017-11-23","21.385058"]},{"value":["2017-11-24","32.039836"]},{"value":["2017-11-25","32.540236"]},{"value":["2017-11-26","22.605553"]},{"value":["2017-11-27","20.497018"]},{"value":["2017-11-28","25.256861"]},{"value":["2017-11-29","18.554737"]},{"value":["2017-11-30","13.287577"]},{"value":["2017-12-01","18.657399"]},{"value":["2017-12-02","23.671489"]},{"value":["2017-12-03","19.300901"]},{"value":["2017-12-04","19.475814"]},{"value":["2017-12-05","27.029449"]},{"value":["2017-12-06","22.323234"]},{"value":["2017-12-07","15.910584"]},{"value":["2017-12-08","24.724500"]},{"value":["2017-12-09","18.681275"]},{"value":["2017-12-10","21.500557"]},{"value":["2017-12-11","27.000983"]},{"value":["2017-12-12","20.702821"]},{"value":["2017-12-13","21.261320"]},{"value":["2017-12-14","12.360019"]},{"value":["2017-12-15","14.893245"]},{"value":["2017-12-16","23.066895"]},{"value":["2017-12-17","21.538754"]},{"value":["2017-12-18"," 7.389002"]},{"value":["2017-12-19","22.924575"]},{"value":["2017-12-20","24.988232"]},{"value":["2017-12-21","11.644046"]},{"value":["2017-12-22","12.026005"]},{"value":["2017-12-23","23.577709"]},{"value":["2017-12-24","12.775749"]},{"value":["2017-12-25","27.362923"]},{"value":["2017-12-26","21.951252"]},{"value":["2017-12-27","14.124809"]},{"value":["2017-12-28","22.642441"]},{"value":["2017-12-29","14.267173"]},{"value":["2017-12-30","23.523550"]},{"value":["2017-12-31","22.391545"]},{"value":["2018-01-01","33.923819"]},{"value":["2018-01-02","30.430040"]},{"value":["2018-01-03","28.649322"]},{"value":["2018-01-04","14.074088"]},{"value":["2018-01-05","22.812990"]},{"value":["2018-01-06","18.767229"]},{"value":["2018-01-07","21.656693"]},{"value":["2018-01-08","11.869545"]},{"value":["2018-01-09","25.203867"]},{"value":["2018-01-10","27.810754"]},{"value":["2018-01-11","23.658244"]},{"value":["2018-01-12","16.848302"]},{"value":["2018-01-13","25.462837"]},{"value":["2018-01-14","14.671247"]},{"value":["2018-01-15","17.879010"]},{"value":["2018-01-16","18.308912"]},{"value":["2018-01-17","23.314006"]},{"value":["2018-01-18","22.079918"]},{"value":["2018-01-19","16.165447"]},{"value":["2018-01-20"," 6.502846"]},{"value":["2018-01-21","15.981534"]},{"value":["2018-01-22","22.983988"]},{"value":["2018-01-23","18.917215"]},{"value":["2018-01-24","31.748723"]},{"value":["2018-01-25","16.739596"]},{"value":["2018-01-26","22.489631"]},{"value":["2018-01-27","21.454957"]},{"value":["2018-01-28","11.647249"]},{"value":["2018-01-29","18.002175"]},{"value":["2018-01-30","17.678693"]},{"value":["2018-01-31","25.861243"]},{"value":["2018-02-01","19.124438"]},{"value":["2018-02-02","18.947617"]},{"value":["2018-02-03","20.334547"]},{"value":["2018-02-04","24.495068"]},{"value":["2018-02-05","27.685036"]},{"value":["2018-02-06","28.145401"]},{"value":["2018-02-07","15.514459"]},{"value":["2018-02-08","21.856927"]},{"value":["2018-02-09","17.119348"]},{"value":["2018-02-10","19.455472"]},{"value":["2018-02-11","14.883838"]},{"value":["2018-02-12","14.908862"]},{"value":["2018-02-13"," 9.186638"]},{"value":["2018-02-14","15.097281"]},{"value":["2018-02-15","20.411114"]},{"value":["2018-02-16"," 8.290503"]},{"value":["2018-02-17","18.983354"]},{"value":["2018-02-18"," 9.579278"]},{"value":["2018-02-19","22.794807"]},{"value":["2018-02-20","23.982314"]},{"value":["2018-02-21","14.750584"]},{"value":["2018-02-22","20.127970"]},{"value":["2018-02-23","19.055280"]},{"value":["2018-02-24","28.892145"]},{"value":["2018-02-25","16.622211"]},{"value":["2018-02-26","11.480207"]},{"value":["2018-02-27","26.678317"]},{"value":["2018-02-28","17.625003"]},{"value":["2018-03-01","18.522182"]},{"value":["2018-03-02","12.169623"]},{"value":["2018-03-03","23.960629"]},{"value":["2018-03-04","17.642064"]},{"value":["2018-03-05","10.339973"]},{"value":["2018-03-06","21.244418"]},{"value":["2018-03-07","11.146087"]},{"value":["2018-03-08","11.364792"]},{"value":["2018-03-09","22.915282"]},{"value":["2018-03-10","14.163489"]},{"value":["2018-03-11","12.921168"]},{"value":["2018-03-12","15.735045"]},{"value":["2018-03-13","20.351128"]},{"value":["2018-03-14","18.140245"]},{"value":["2018-03-15","15.901110"]},{"value":["2018-03-16","18.246249"]},{"value":["2018-03-17","17.485267"]},{"value":["2018-03-18","14.700102"]},{"value":["2018-03-19","32.453498"]},{"value":["2018-03-20","21.414377"]},{"value":["2018-03-21","25.588150"]},{"value":["2018-03-22","15.126672"]},{"value":["2018-03-23","22.899503"]},{"value":["2018-03-24","32.448912"]},{"value":["2018-03-25","15.408314"]},{"value":["2018-03-26","23.501792"]},{"value":["2018-03-27","11.348455"]},{"value":["2018-03-28","23.186682"]},{"value":["2018-03-29","29.639432"]},{"value":["2018-03-30","13.282180"]},{"value":["2018-03-31","23.036216"]},{"value":["2018-04-01","25.624911"]},{"value":["2018-04-02","11.617025"]},{"value":["2018-04-03","14.435593"]},{"value":["2018-04-04"," 8.050596"]},{"value":["2018-04-05","19.330154"]},{"value":["2018-04-06","18.971261"]},{"value":["2018-04-07","16.271417"]},{"value":["2018-04-08"," 4.133926"]},{"value":["2018-04-09","15.792512"]},{"value":["2018-04-10","26.969034"]},{"value":["2018-04-11","20.688500"]},{"value":["2018-04-12","27.104789"]},{"value":["2018-04-13","24.226738"]},{"value":["2018-04-14","14.939611"]},{"value":["2018-04-15","12.829645"]},{"value":["2018-04-16","17.408202"]},{"value":["2018-04-17","25.848805"]},{"value":["2018-04-18","30.052921"]},{"value":["2018-04-19","20.152797"]},{"value":["2018-04-20","20.221243"]},{"value":["2018-04-21"," 8.701194"]},{"value":["2018-04-22","19.785196"]},{"value":["2018-04-23","18.135186"]},{"value":["2018-04-24","21.658000"]},{"value":["2018-04-25","13.975480"]},{"value":["2018-04-26","30.507133"]},{"value":["2018-04-27","30.955295"]},{"value":["2018-04-28","13.846812"]},{"value":["2018-04-29","20.743872"]},{"value":["2018-04-30","17.670188"]},{"value":["2018-05-01"," 8.571860"]},{"value":["2018-05-02","22.081784"]},{"value":["2018-05-03","15.303207"]},{"value":["2018-05-04","20.732443"]},{"value":["2018-05-05","28.998512"]},{"value":["2018-05-06","18.898302"]},{"value":["2018-05-07","24.250236"]},{"value":["2018-05-08","28.287676"]},{"value":["2018-05-09"," 9.086256"]},{"value":["2018-05-10","17.414145"]},{"value":["2018-05-11","25.029509"]},{"value":["2018-05-12","26.739003"]},{"value":["2018-05-13","12.517323"]},{"value":["2018-05-14","16.819467"]},{"value":["2018-05-15","20.869845"]},{"value":["2018-05-16","21.068305"]},{"value":["2018-05-17","18.552554"]},{"value":["2018-05-18","21.496439"]},{"value":["2018-05-19","11.852255"]},{"value":["2018-05-20","20.447965"]},{"value":["2018-05-21","27.016790"]},{"value":["2018-05-22","17.175461"]},{"value":["2018-05-23","25.113143"]},{"value":["2018-05-24","29.240090"]},{"value":["2018-05-25","24.141388"]},{"value":["2018-05-26","21.897978"]},{"value":["2018-05-27","25.709167"]},{"value":["2018-05-28","25.221482"]},{"value":["2018-05-29","20.854548"]},{"value":["2018-05-30","22.699232"]},{"value":["2018-05-31","20.426019"]},{"value":["2018-06-01","29.327145"]},{"value":["2018-06-02","19.492232"]},{"value":["2018-06-03","19.637586"]},{"value":["2018-06-04","20.516671"]},{"value":["2018-06-05","20.388921"]},{"value":["2018-06-06","30.343771"]},{"value":["2018-06-07","15.779161"]},{"value":["2018-06-08","14.355479"]},{"value":["2018-06-09","24.237417"]},{"value":["2018-06-10","21.820845"]},{"value":["2018-06-11","12.389857"]},{"value":["2018-06-12","20.382788"]},{"value":["2018-06-13","16.548382"]},{"value":["2018-06-14","19.994756"]},{"value":["2018-06-15","15.367440"]},{"value":["2018-06-16"," 9.800622"]},{"value":["2018-06-17","12.205291"]},{"value":["2018-06-18","27.488046"]},{"value":["2018-06-19","15.425161"]},{"value":["2018-06-20","17.011458"]},{"value":["2018-06-21","18.935494"]},{"value":["2018-06-22","24.382953"]},{"value":["2018-06-23","23.544863"]},{"value":["2018-06-24","16.651369"]},{"value":["2018-06-25","19.064654"]},{"value":["2018-06-26","22.139608"]},{"value":["2018-06-27","12.859014"]},{"value":["2018-06-28","22.718274"]},{"value":["2018-06-29"," 5.322095"]},{"value":["2018-06-30","20.914393"]},{"value":["2018-07-01","20.463048"]},{"value":["2018-07-02","22.925397"]},{"value":["2018-07-03","15.207662"]},{"value":["2018-07-04","22.797371"]},{"value":["2018-07-05","16.632745"]},{"value":["2018-07-06","19.998569"]},{"value":["2018-07-07","22.851022"]},{"value":["2018-07-08","20.381226"]},{"value":["2018-07-09","16.106673"]},{"value":["2018-07-10","27.695089"]},{"value":["2018-07-11","29.074224"]},{"value":["2018-07-12","25.149882"]},{"value":["2018-07-13","22.642363"]},{"value":["2018-07-14","14.655711"]},{"value":["2018-07-15","16.225037"]},{"value":["2018-07-16","11.699954"]},{"value":["2018-07-17","23.465401"]},{"value":["2018-07-18","18.040238"]},{"value":["2018-07-19","21.239648"]},{"value":["2018-07-20","17.545545"]},{"value":["2018-07-21","24.663597"]},{"value":["2018-07-22","18.834734"]},{"value":["2018-07-23","28.843532"]},{"value":["2018-07-24"," 6.066276"]},{"value":["2018-07-25","24.243926"]},{"value":["2018-07-26","23.185117"]},{"value":["2018-07-27"," 9.327823"]},{"value":["2018-07-28","23.390838"]},{"value":["2018-07-29","23.190962"]},{"value":["2018-07-30","12.520376"]},{"value":["2018-07-31","18.914434"]},{"value":["2018-08-01","23.480817"]},{"value":["2018-08-02","16.373287"]},{"value":["2018-08-03","39.107533"]},{"value":["2018-08-04","17.195257"]},{"value":["2018-08-05","28.894355"]},{"value":["2018-08-06","35.035313"]},{"value":["2018-08-07","24.627536"]},{"value":["2018-08-08","14.744998"]},{"value":["2018-08-09","14.302131"]},{"value":["2018-08-10","18.236954"]},{"value":["2018-08-11","14.724199"]},{"value":["2018-08-12","18.421092"]},{"value":["2018-08-13","18.247554"]},{"value":["2018-08-14"," 9.342411"]},{"value":["2018-08-15","13.892003"]},{"value":["2018-08-16","19.530140"]},{"value":["2018-08-17","27.037305"]},{"value":["2018-08-18","14.628765"]},{"value":["2018-08-19"," 5.401731"]},{"value":["2018-08-20","24.682957"]},{"value":["2018-08-21","21.348520"]},{"value":["2018-08-22","11.974568"]},{"value":["2018-08-23","26.631436"]},{"value":["2018-08-24","19.020620"]},{"value":["2018-08-25","16.547746"]},{"value":["2018-08-26","17.513730"]},{"value":["2018-08-27","19.871158"]},{"value":["2018-08-28","20.539528"]},{"value":["2018-08-29","23.407088"]},{"value":["2018-08-30","27.696407"]},{"value":["2018-08-31","21.171048"]},{"value":["2018-09-01","20.437748"]},{"value":["2018-09-02","24.718688"]},{"value":["2018-09-03","16.004943"]},{"value":["2018-09-04","28.467986"]},{"value":["2018-09-05","14.958167"]},{"value":["2018-09-06","16.427851"]},{"value":["2018-09-07","20.793279"]},{"value":["2018-09-08","26.822115"]},{"value":["2018-09-09","13.387622"]},{"value":["2018-09-10","18.159390"]},{"value":["2018-09-11","12.245859"]},{"value":["2018-09-12","24.762218"]},{"value":["2018-09-13","21.043496"]},{"value":["2018-09-14","11.672719"]},{"value":["2018-09-15","24.207574"]},{"value":["2018-09-16","18.390184"]},{"value":["2018-09-17","23.403165"]},{"value":["2018-09-18","21.221341"]},{"value":["2018-09-19","29.810723"]},{"value":["2018-09-20","12.485270"]},{"value":["2018-09-21","24.428901"]},{"value":["2018-09-22","18.501630"]},{"value":["2018-09-23","18.075538"]},{"value":["2018-09-24","27.206659"]},{"value":["2018-09-25","18.718039"]},{"value":["2018-09-26","21.969102"]},{"value":["2018-09-27","28.251473"]},{"value":["2018-09-28","30.611041"]},{"value":["2018-09-29","16.236958"]},{"value":["2018-09-30","15.240755"]},{"value":["2018-10-01","27.275153"]},{"value":["2018-10-02","20.288779"]},{"value":["2018-10-03","19.154838"]},{"value":["2018-10-04","17.783356"]},{"value":["2018-10-05","30.624716"]},{"value":["2018-10-06","16.663411"]},{"value":["2018-10-07","26.889379"]},{"value":["2018-10-08","21.803401"]},{"value":["2018-10-09","34.688031"]},{"value":["2018-10-10","23.060520"]},{"value":["2018-10-11","16.227165"]},{"value":["2018-10-12","16.550156"]},{"value":["2018-10-13","17.799733"]},{"value":["2018-10-14","28.315408"]},{"value":["2018-10-15","23.096736"]},{"value":["2018-10-16","11.352776"]},{"value":["2018-10-17","24.453353"]},{"value":["2018-10-18","24.489734"]},{"value":["2018-10-19","23.780525"]},{"value":["2018-10-20"," 9.277883"]},{"value":["2018-10-21","20.721517"]},{"value":["2018-10-22","21.966380"]},{"value":["2018-10-23","13.589887"]},{"value":["2018-10-24","16.324281"]},{"value":["2018-10-25","24.444669"]},{"value":["2018-10-26","19.498368"]},{"value":["2018-10-27","11.631227"]},{"value":["2018-10-28","19.794970"]},{"value":["2018-10-29","17.763394"]},{"value":["2018-10-30","19.771719"]},{"value":["2018-10-31","16.076140"]},{"value":["2018-11-01","20.245100"]},{"value":["2018-11-02","19.973931"]},{"value":["2018-11-03","34.043067"]},{"value":["2018-11-04","32.242858"]},{"value":["2018-11-05","17.782426"]},{"value":["2018-11-06","17.828348"]},{"value":["2018-11-07","16.565180"]},{"value":["2018-11-08","23.209551"]},{"value":["2018-11-09","24.587427"]},{"value":["2018-11-10","20.686236"]},{"value":["2018-11-11","22.599306"]},{"value":["2018-11-12","11.631830"]},{"value":["2018-11-13","24.689958"]},{"value":["2018-11-14","26.631768"]},{"value":["2018-11-15","27.364400"]},{"value":["2018-11-16","13.744079"]},{"value":["2018-11-17","28.317784"]},{"value":["2018-11-18","17.531208"]},{"value":["2018-11-19","26.803916"]},{"value":["2018-11-20","15.283518"]},{"value":["2018-11-21","20.572301"]},{"value":["2018-11-22","20.772879"]},{"value":["2018-11-23","13.062282"]},{"value":["2018-11-24","14.998439"]},{"value":["2018-11-25","19.663820"]},{"value":["2018-11-26","13.127836"]},{"value":["2018-11-27","18.700730"]},{"value":["2018-11-28","15.458697"]},{"value":["2018-11-29","16.471276"]},{"value":["2018-11-30","15.099360"]},{"value":["2018-12-01","18.304746"]},{"value":["2018-12-02","14.699999"]},{"value":["2018-12-03","19.308936"]},{"value":["2018-12-04","21.071989"]},{"value":["2018-12-05","24.097894"]},{"value":["2018-12-06","24.062864"]},{"value":["2018-12-07","16.754317"]},{"value":["2018-12-08","16.567145"]},{"value":["2018-12-09","21.348902"]},{"value":["2018-12-10","17.325517"]},{"value":["2018-12-11","31.325873"]},{"value":["2018-12-12","17.396431"]},{"value":["2018-12-13","20.049298"]},{"value":["2018-12-14","17.469495"]},{"value":["2018-12-15","16.294947"]},{"value":["2018-12-16","22.597323"]},{"value":["2018-12-17","26.567875"]},{"value":["2018-12-18","10.310929"]},{"value":["2018-12-19","23.042973"]},{"value":["2018-12-20","27.381156"]},{"value":["2018-12-21","12.210467"]},{"value":["2018-12-22","12.462141"]},{"value":["2018-12-23","18.553445"]},{"value":["2018-12-24","13.291732"]},{"value":["2018-12-25","14.780885"]},{"value":["2018-12-26","17.224432"]},{"value":["2018-12-27","28.007086"]},{"value":["2018-12-28","27.839792"]},{"value":["2018-12-29","26.384243"]},{"value":["2018-12-30","22.947947"]},{"value":["2018-12-31","17.377787"]}],"name":null,"type":"heatmap","coordinateSystem":"calendar","calendarIndex":0}],"visualMap":[{"max":30,"calculable":true,"type":"continuous"}],"title":{"text":"Calendar","subtext":"Heatmap"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.10" class="section level2">
+<h2><span class="header-section-number">1.10</span> 仪表图</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(echarts4r)
+
+<span class="kw">e_charts</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_gauge</span>(<span class="dv">41</span>, <span class="st">&quot;PERCENT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">e_title</span>(<span class="st">&quot;Gauge&quot;</span>)</code></pre></div>
+<div id="htmlwidget-13ae138f468c07d0c972" style="width:100%;height:500px;" class="echarts4r html-widget"></div>
+<script type="application/json" data-for="htmlwidget-13ae138f468c07d0c972">{"x":{"theme":"","tl":false,"renderer":"canvas","events":[],"buttons":[],"opts":{"series":[{"data":[{"value":41,"name":"PERCENT"}],"type":"gauge"}],"title":{"text":"Gauge"}},"dispose":true},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="canvasxpress.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>
