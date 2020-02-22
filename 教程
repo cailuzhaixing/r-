@@ -1,0 +1,470 @@
+---
+output:
+  bookdown::gitbook
+---
+
+# echarts4r类型
+## 线图和面积图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df <- data.frame(
+  x = seq(50),
+  y = rnorm(50, 10, 3),
+  z = rnorm(50, 11, 2),
+  w = rnorm(50, 9, 2)
+)
+
+df %>% 
+  e_charts(x) %>% 
+  e_line(z) %>% 
+  e_area(w) %>% 
+  e_title("Line and area charts")
+
+```
+
+## 柱形图和阶梯图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df %>% 
+  e_charts(x) %>% 
+  e_bar(y, name = "Serie 1") %>% 
+  e_step(z, name = "Serie 2") %>% 
+  e_title("Bar and step charts")
+
+```
+
+## 散点图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df %>% 
+  e_charts(x) %>% 
+  e_scatter(y, z) %>% 
+  e_visual_map(z, scale = e_scale) %>% # scale color
+  e_legend(FALSE) # hide legend
+
+```
+
+## 光晕散点图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df %>% 
+  e_charts(x) %>% 
+  e_scatter(y, z) %>% 
+  e_visual_map(z, scale = e_scale) %>% # scale color
+  e_legend(FALSE) # hide legend
+
+```
+
+## 极坐标图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df %>% 
+  e_charts(x) %>% 
+  e_polar() %>% 
+  e_angle_axis(x) %>% # angle = x
+  e_radius_axis() %>% 
+  e_bar(y, coord_system = "polar") %>% 
+  e_scatter(z, coord_system = "polar")
+
+```
+
+## 径向图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df %>% 
+  head(10) %>% 
+  e_charts(x) %>% 
+  e_polar() %>% 
+  e_angle_axis() %>% 
+  e_radius_axis(x) %>% 
+  e_bar(y, coord_system = "polar") %>% 
+  e_scatter(z, coord_system = "polar")
+```
+
+## 漏斗图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+funnel <- data.frame(stage = c("View", "Click", "Purchase"), value = c(80, 30, 20))
+
+funnel %>% 
+  e_charts() %>% 
+  e_funnel(value, stage) %>% 
+  e_title("Funnel")
+```
+
+## 旭日图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+df <- data.frame(
+  parent = c("earth", "earth", "earth", "mars", "mars"), 
+  child = c("forest", "ocean", "iceberg", "elon", "curiosity"),
+  value = ceiling(rnorm(5, 10, 2))
+)
+
+df %>% 
+  e_charts() %>% 
+  e_sunburst(parent, child, value) %>% 
+  e_title("Sunburst")
+```
+
+## 日历图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+dates <- seq.Date(as.Date("2017-01-01"), as.Date("2018-12-31"), by = "day")
+values <- rnorm(length(dates), 20, 6)
+
+year <- data.frame(date = dates, values = values)
+
+year %>% 
+  e_charts(date) %>% 
+  e_calendar(range = "2018") %>% 
+  e_heatmap(values, coord_system = "calendar") %>% 
+  e_visual_map(max = 30) %>% 
+  e_title("Calendar", "Heatmap")
+```
+
+## 仪表图
+
+```{r message=FALSE}
+
+library(echarts4r)
+
+e_charts() %>% 
+  e_gauge(41, "PERCENT") %>% 
+  e_title("Gauge")
+```
+
+# canvasXpress
+## 气泡云图
+
+```{r message=FALSE}
+
+  library(canvasXpress)
+  y=read.table("http://www.canvasxpress.org/data/cX-tree-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  x=read.table("http://www.canvasxpress.org/data/cX-tree-smp.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    smpAnnot=x,
+    circularType="bubble",
+    graphType="Circular",
+    showTransition=TRUE,
+    title="Simple Bubble Graph"
+  )
+```
+
+## 韦恩图
+
+```{r message=FALSE}
+
+  library(canvasXpress)
+  canvasXpress(
+    vennData=data.frame(AC=456, A=340, ABC=552, ABCD=148, BC=915, ACD=298, BCD=613, B=562, CD=143, ABD=578, C=620, D=592, AB=639, BD=354, AD=257),
+    vennLegend=list(A="List 1", B="List 2", C="List 3", D="List 4"),
+    graphType="Venn",
+    showTransition=TRUE,
+    vennGroups=4
+  )
+  
+```
+
+## 和弦图
+
+```{r message=FALSE}
+
+library(canvasXpress)
+  y=read.table("http://www.canvasxpress.org/data/cX-chord-dat.txt", header=TRUE, sep="\t", quote="", row.names=1, fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    data=y,
+    circularArc=360,
+    circularRotate=0,
+    circularType="chord",
+    colors=list("#000000", "#FFDD89", "#957244", "#F26223"),
+    graphType="Circular",
+    higlightGreyOut=TRUE,
+    rAxisTickFormat=list("%sK", "val / 1000"),
+    showTransition=TRUE,
+    title="Simple Chord Graph",
+    transitionStep=50,
+    transitionTime=1500
+  )
+  
+```
+
+## 流程图
+
+```{r message=FALSE}
+
+ library(canvasXpress)
+  nodes=read.table("http://www.canvasxpress.org/data/cX-wpapoptosis-nodes.txt", header=TRUE, sep="\t", quote="", fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  edges=read.table("http://www.canvasxpress.org/data/cX-wpapoptosis-edges.txt", header=TRUE, sep="\t", quote="", fill=TRUE, check.names=FALSE, stringsAsFactors=FALSE)
+  canvasXpress(
+    nodeData=nodes,
+    edgeData=edges,
+    adjustBezier=FALSE,
+    calculateLayout=FALSE,
+    graphType="Network",
+    networkFreeze=TRUE,
+    networkNodesOnTop=FALSE,
+    preScaleNetwork=FALSE,
+    showAnimation=FALSE,
+    showNodeNameThreshold=20000,
+    title="Apoptosis"
+  )
+  
+```
+
+# 流程图diagramer
+## 左右
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+  graph LR
+    A-->B
+    A-->C
+    C-->E
+    B-->D
+    C-->D
+    D-->F
+    E-->F
+")
+  
+```
+
+## 上下
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+  graph TB
+    A-->B
+    A-->C
+    C-->E
+    B-->D
+    C-->D
+    D-->F
+    E-->F
+")
+  
+```
+
+## 节点形状
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+graph LR
+A[矩形]
+B(圆角矩形)
+C((圆形))
+D>尖角矩形]
+E{菱形}
+")
+  
+```
+
+## CSS样式
+- CSS样式：填充fill,边框颜色：stroke,边框宽度：stroke-width，边框线形：stroke-dasharray
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+graph TD
+  A-->B
+    style A fill:#f9f;
+     style A stroke:#f66;
+     style A stroke-width:4px;
+      style A stroke-dasharray: 5, 5
+    
+")
+  
+```
+
+## CSS类应用
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+graph TD
+  A-->B
+  B-->C
+ class A,B T; 
+ classDef T fill:#f9f;
+")
+  
+```
+
+## CSS线条设置
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+graph LR
+A-->B
+B-->C
+C-->D
+linkStyle 0 stroke:#f9f
+")
+  
+```
+
+
+## 分块
+
+
+```{r message=FALSE}
+
+ library(DiagrammeR)
+  DiagrammeR("
+graph LR
+ subgraph one
+    a1-->a2
+ end
+  subgraph two
+    b1-->b2
+ end
+ b1---a2
+")
+  
+```
+
+
+## 序列流程图
+
+```{r message=FALSE}
+
+DiagrammeR("
+sequenceDiagram;
+   customer->>ticket seller: ask for ticket;
+   ticket seller->>database: seats;
+   alt tickets available
+     database->>ticket seller: ok;
+     ticket seller->>customer: confirm;
+     customer->>ticket seller: ok;
+     ticket seller->>database: book a seat;
+     ticket seller->>printer: print ticket;
+   else sold out
+     database->>ticket seller: none left;
+     ticket seller->>customer:  sorry;
+   end
+")
+  
+```
+
+## 甘特图
+
+```{r message=FALSE}
+
+DiagrammeR("
+gantt
+dateFormat  YYYY-MM-DD
+title Shop项目交付计划
+
+section 里程碑 0.1 
+数据库设计          :active,    p1, 2016-08-15, 3d
+详细设计            :           p2, after p1, 2d
+
+section 里程碑 0.2
+后端开发            :           p3, 2016-08-22, 20d
+前端开发            :           p4, 2016-08-22, 15d
+
+section 里程碑 0.3
+功能测试            :       p6, after p3, 5d
+上线               :       p7, after p6, 2d
+交付               :       p8, afterp7, 2d
+")
+  
+```
+
+# timevis
+## 类型
+```{r message=FALSE}
+library(timevis)
+timevis(
+  data.frame(id = 1:4,
+             content = c("one", "two","three", "four"),
+             start = c("2016-01-10", "2016-01-12","2016-01-14","2016-01-16"),
+            end = c("2016-01-18", "2016-01-20","2016-01-22","2016-01-24"),
+             type=c("box","point","range","background")
+))
+  
+```
+
+## CSS
+```{r message=FALSE}
+library(timevis)
+timevis(
+  data.frame(id = 1:4,
+             content = c("one", "two","three", "four"),
+             start = c("2016-01-10", "2016-01-12","2016-01-14","2016-01-16"),
+            end = c("2016-01-18", "2016-01-20","2016-01-22","2016-01-24"),
+             type=c("box","range","range","box"),
+             style=c("outline-color:red","border-color:red","background-color: gray","border-width:5px")
+))
+  
+```
+
+# 地图leafletCN
+
+## 中国地图
+```{r message=FALSE}
+
+library(leafletCN)
+demomap('china')
+
+```
+
+## 省地图
+```{r message=FALSE}
+
+library(leafletCN)
+demomap('河南省')
+
+```
+
+## 市地图
+```{r message=FALSE}
+
+library(leafletCN)
+demomap('安阳市')
+
+```
+
