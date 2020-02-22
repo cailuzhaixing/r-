@@ -1,0 +1,13 @@
+1、data.table包
+library(data.table)
+#转换为data.table对象。
+方法一：DT=data.table(iris)
+方法二：DT = as.data.table(iris)
+DT[条件,汇总，依据]
+# FROM[WHERE, SELECT, GROUP BY]
+# DT  [i,     j,      by]
+
+DT[Petal.Width > 1.0, mean(Petal.Length), by = Species]
+#      Species       V1
+#1: versicolor 4.362791
+#2:  virginica 5.552000
