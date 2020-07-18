@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 timevis | 教程.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 timevis | 教程.utf8" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 timevis | 教程.utf8" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="流程图diagramer.html"/>
+<link rel="next" href="地图leafletcn.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/echarts4r-4.8.0/echarts-en.min.js"></script>
+<script src="libs/echarts4r-4.8.0/ecStat.min.js"></script>
+<script src="libs/echarts4r-4.8.0/dataTool.min.js"></script>
+<script src="libs/echarts4r-binding-0.3.2/echarts4r.js"></script>
+<link href="libs/canvasXpress-27.6/canvasXpress.css" rel="stylesheet" />
+<script src="libs/canvasXpress-27.6/canvasXpress.min.js"></script>
+<script src="libs/canvasXpress-binding-1.27.6.1/canvasXpress.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.6.1/DiagrammeR.js"></script>
+<link href="libs/vis-4.16.1/vis.min.css" rel="stylesheet" />
+<script src="libs/vis-4.16.1/vis.min.js"></script>
+<link href="libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="libs/timevis-binding-0.5/timevis.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="echarts4r类型.html"><a href="echarts4r类型.html"><i class="fa fa-check"></i><b>1</b> echarts4r类型</a><ul>
+<li class="chapter" data-level="1.1" data-path="echarts4r类型.html"><a href="echarts4r类型.html#线图和面积图"><i class="fa fa-check"></i><b>1.1</b> 线图和面积图</a></li>
+<li class="chapter" data-level="1.2" data-path="echarts4r类型.html"><a href="echarts4r类型.html#柱形图和阶梯图"><i class="fa fa-check"></i><b>1.2</b> 柱形图和阶梯图</a></li>
+<li class="chapter" data-level="1.3" data-path="echarts4r类型.html"><a href="echarts4r类型.html#散点图"><i class="fa fa-check"></i><b>1.3</b> 散点图</a></li>
+<li class="chapter" data-level="1.4" data-path="echarts4r类型.html"><a href="echarts4r类型.html#光晕散点图"><i class="fa fa-check"></i><b>1.4</b> 光晕散点图</a></li>
+<li class="chapter" data-level="1.5" data-path="echarts4r类型.html"><a href="echarts4r类型.html#极坐标图"><i class="fa fa-check"></i><b>1.5</b> 极坐标图</a></li>
+<li class="chapter" data-level="1.6" data-path="echarts4r类型.html"><a href="echarts4r类型.html#径向图"><i class="fa fa-check"></i><b>1.6</b> 径向图</a></li>
+<li class="chapter" data-level="1.7" data-path="echarts4r类型.html"><a href="echarts4r类型.html#漏斗图"><i class="fa fa-check"></i><b>1.7</b> 漏斗图</a></li>
+<li class="chapter" data-level="1.8" data-path="echarts4r类型.html"><a href="echarts4r类型.html#旭日图"><i class="fa fa-check"></i><b>1.8</b> 旭日图</a></li>
+<li class="chapter" data-level="1.9" data-path="echarts4r类型.html"><a href="echarts4r类型.html#日历图"><i class="fa fa-check"></i><b>1.9</b> 日历图</a></li>
+<li class="chapter" data-level="1.10" data-path="echarts4r类型.html"><a href="echarts4r类型.html#仪表图"><i class="fa fa-check"></i><b>1.10</b> 仪表图</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="canvasxpress.html"><a href="canvasxpress.html"><i class="fa fa-check"></i><b>2</b> canvasXpress</a><ul>
+<li class="chapter" data-level="2.1" data-path="canvasxpress.html"><a href="canvasxpress.html#气泡云图"><i class="fa fa-check"></i><b>2.1</b> 气泡云图</a></li>
+<li class="chapter" data-level="2.2" data-path="canvasxpress.html"><a href="canvasxpress.html#韦恩图"><i class="fa fa-check"></i><b>2.2</b> 韦恩图</a></li>
+<li class="chapter" data-level="2.3" data-path="canvasxpress.html"><a href="canvasxpress.html#和弦图"><i class="fa fa-check"></i><b>2.3</b> 和弦图</a></li>
+<li class="chapter" data-level="2.4" data-path="canvasxpress.html"><a href="canvasxpress.html#流程图"><i class="fa fa-check"></i><b>2.4</b> 流程图</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="流程图diagramer.html"><a href="流程图diagramer.html"><i class="fa fa-check"></i><b>3</b> 流程图diagramer</a><ul>
+<li class="chapter" data-level="3.1" data-path="流程图diagramer.html"><a href="流程图diagramer.html#左右"><i class="fa fa-check"></i><b>3.1</b> 左右</a></li>
+<li class="chapter" data-level="3.2" data-path="流程图diagramer.html"><a href="流程图diagramer.html#上下"><i class="fa fa-check"></i><b>3.2</b> 上下</a></li>
+<li class="chapter" data-level="3.3" data-path="流程图diagramer.html"><a href="流程图diagramer.html#节点形状"><i class="fa fa-check"></i><b>3.3</b> 节点形状</a></li>
+<li class="chapter" data-level="3.4" data-path="流程图diagramer.html"><a href="流程图diagramer.html#css样式"><i class="fa fa-check"></i><b>3.4</b> CSS样式</a></li>
+<li class="chapter" data-level="3.5" data-path="流程图diagramer.html"><a href="流程图diagramer.html#css类应用"><i class="fa fa-check"></i><b>3.5</b> CSS类应用</a></li>
+<li class="chapter" data-level="3.6" data-path="流程图diagramer.html"><a href="流程图diagramer.html#css线条设置"><i class="fa fa-check"></i><b>3.6</b> CSS线条设置</a></li>
+<li class="chapter" data-level="3.7" data-path="流程图diagramer.html"><a href="流程图diagramer.html#分块"><i class="fa fa-check"></i><b>3.7</b> 分块</a></li>
+<li class="chapter" data-level="3.8" data-path="流程图diagramer.html"><a href="流程图diagramer.html#序列流程图"><i class="fa fa-check"></i><b>3.8</b> 序列流程图</a></li>
+<li class="chapter" data-level="3.9" data-path="流程图diagramer.html"><a href="流程图diagramer.html#甘特图"><i class="fa fa-check"></i><b>3.9</b> 甘特图</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="timevis.html"><a href="timevis.html"><i class="fa fa-check"></i><b>4</b> timevis</a><ul>
+<li class="chapter" data-level="4.1" data-path="timevis.html"><a href="timevis.html#类型"><i class="fa fa-check"></i><b>4.1</b> 类型</a></li>
+<li class="chapter" data-level="4.2" data-path="timevis.html"><a href="timevis.html#css"><i class="fa fa-check"></i><b>4.2</b> CSS</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="地图leafletcn.html"><a href="地图leafletcn.html"><i class="fa fa-check"></i><b>5</b> 地图leafletCN</a><ul>
+<li class="chapter" data-level="5.1" data-path="地图leafletcn.html"><a href="地图leafletcn.html#中国地图"><i class="fa fa-check"></i><b>5.1</b> 中国地图</a></li>
+<li class="chapter" data-level="5.2" data-path="地图leafletcn.html"><a href="地图leafletcn.html#省地图"><i class="fa fa-check"></i><b>5.2</b> 省地图</a></li>
+<li class="chapter" data-level="5.3" data-path="地图leafletcn.html"><a href="地图leafletcn.html#市地图"><i class="fa fa-check"></i><b>5.3</b> 市地图</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="timevis" class="section level1">
+<h1><span class="header-section-number">4</span> timevis</h1>
+<div id="类型" class="section level2">
+<h2><span class="header-section-number">4.1</span> 类型</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">library</span>(timevis)</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw">timevis</span>(</a>
+<a class="sourceLine" id="cb24-3" title="3">  <span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb24-4" title="4">             <span class="dt">content =</span> <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>,<span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>),</a>
+<a class="sourceLine" id="cb24-5" title="5">             <span class="dt">start =</span> <span class="kw">c</span>(<span class="st">&quot;2016-01-10&quot;</span>, <span class="st">&quot;2016-01-12&quot;</span>,<span class="st">&quot;2016-01-14&quot;</span>,<span class="st">&quot;2016-01-16&quot;</span>),</a>
+<a class="sourceLine" id="cb24-6" title="6">            <span class="dt">end =</span> <span class="kw">c</span>(<span class="st">&quot;2016-01-18&quot;</span>, <span class="st">&quot;2016-01-20&quot;</span>,<span class="st">&quot;2016-01-22&quot;</span>,<span class="st">&quot;2016-01-24&quot;</span>),</a>
+<a class="sourceLine" id="cb24-7" title="7">             <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;box&quot;</span>,<span class="st">&quot;point&quot;</span>,<span class="st">&quot;range&quot;</span>,<span class="st">&quot;background&quot;</span>)</a>
+<a class="sourceLine" id="cb24-8" title="8">))</a></code></pre></div>
+<div id="htmlwidget-62f98a03cf94f858016a" class="timevis html-widget" style="width:672px;height:480px;">
+<div class="btn-group zoom-menu">
+<button type="button" class="btn btn-default btn-lg zoom-in" title="Zoom in">+</button>
+<button type="button" class="btn btn-default btn-lg zoom-out" title="Zoom out">-</button>
+</div>
+</div>
+<script type="application/json" data-for="htmlwidget-62f98a03cf94f858016a">{"x":{"items":[{"id":"1","content":"one","start":"2016-01-10","end":"2016-01-18","type":"box"},{"id":"2","content":"two","start":"2016-01-12","end":"2016-01-20","type":"point"},{"id":"3","content":"three","start":"2016-01-14","end":"2016-01-22","type":"range"},{"id":"4","content":"four","start":"2016-01-16","end":"2016-01-24","type":"background"}],"groups":null,"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":null,"api":[]},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="css" class="section level2">
+<h2><span class="header-section-number">4.2</span> CSS</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">library</span>(timevis)</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">timevis</span>(</a>
+<a class="sourceLine" id="cb25-3" title="3">  <span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb25-4" title="4">             <span class="dt">content =</span> <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>,<span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>),</a>
+<a class="sourceLine" id="cb25-5" title="5">             <span class="dt">start =</span> <span class="kw">c</span>(<span class="st">&quot;2016-01-10&quot;</span>, <span class="st">&quot;2016-01-12&quot;</span>,<span class="st">&quot;2016-01-14&quot;</span>,<span class="st">&quot;2016-01-16&quot;</span>),</a>
+<a class="sourceLine" id="cb25-6" title="6">            <span class="dt">end =</span> <span class="kw">c</span>(<span class="st">&quot;2016-01-18&quot;</span>, <span class="st">&quot;2016-01-20&quot;</span>,<span class="st">&quot;2016-01-22&quot;</span>,<span class="st">&quot;2016-01-24&quot;</span>),</a>
+<a class="sourceLine" id="cb25-7" title="7">             <span class="dt">type=</span><span class="kw">c</span>(<span class="st">&quot;box&quot;</span>,<span class="st">&quot;range&quot;</span>,<span class="st">&quot;range&quot;</span>,<span class="st">&quot;box&quot;</span>),</a>
+<a class="sourceLine" id="cb25-8" title="8">             <span class="dt">style=</span><span class="kw">c</span>(<span class="st">&quot;outline-color:red&quot;</span>,<span class="st">&quot;border-color:red&quot;</span>,<span class="st">&quot;background-color: gray&quot;</span>,<span class="st">&quot;border-width:5px&quot;</span>)</a>
+<a class="sourceLine" id="cb25-9" title="9">))</a></code></pre></div>
+<div id="htmlwidget-c73904a6b5326d989564" class="timevis html-widget" style="width:672px;height:480px;">
+<div class="btn-group zoom-menu">
+<button type="button" class="btn btn-default btn-lg zoom-in" title="Zoom in">+</button>
+<button type="button" class="btn btn-default btn-lg zoom-out" title="Zoom out">-</button>
+</div>
+</div>
+<script type="application/json" data-for="htmlwidget-c73904a6b5326d989564">{"x":{"items":[{"id":"1","content":"one","start":"2016-01-10","end":"2016-01-18","type":"box","style":"outline-color:red"},{"id":"2","content":"two","start":"2016-01-12","end":"2016-01-20","type":"range","style":"border-color:red"},{"id":"3","content":"three","start":"2016-01-14","end":"2016-01-22","type":"range","style":"background-color: gray"},{"id":"4","content":"four","start":"2016-01-16","end":"2016-01-24","type":"box","style":"border-width:5px"}],"groups":null,"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":null,"api":[]},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="流程图diagramer.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="地图leafletcn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>
