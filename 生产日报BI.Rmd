@@ -1,0 +1,1837 @@
+---
+title: "生产数据看板"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    
+---
+
+```{r setup, include=FALSE}
+library(sqldf)
+library(flexdashboard)
+library('RODBC')
+library(openxlsx)
+library('recharts')
+library(plyr)
+library(DT) 
+library('lubridate')
+library(sparkline)
+library(DiagrammeR)
+library('crosstalk')
+library(plotly)
+library(janitor)
+file.copy('//10.96.168.4/Public/生产部/2020年报送日报/PTS2020.xlsm','d:/PTS2020.xlsm')
+d<-as.numeric(Sys.Date( )-ymd('20200101'))
+x<-read.xlsx('d:PTS2020.xlsm',sheet=1,rows=3:(d+3),cols=1:160)
+chat<-mutate(x,时间=excel_numeric_to_date(x$时间))
+conn <- odbcConnectAccess(access.file="d:/2020年/生产数据汇总.mdb")
+#chat<-sqlQuery(channel=conn,query='select * from 2020年数据 order by 时间')
+qh<-sqlQuery(channel=conn,query='select * from 气化中心日报 where month(气化时间)')
+hc<-sqlQuery(channel=conn,query='select * from 合成中心日报 where month(合成时间)')
+gy<-sqlQuery(channel=conn,query='select * from 公用中心日报 where month(公用时间)')
+dl<-sqlQuery(channel=conn,query='select * from 动力中心日报 where month(动力时间)')
+chat2<-sqlQuery(channel=conn,query='select * from 2020年数据 where month(时间)=7 order by 时间')
+dh<-sqlQuery(channel=conn,query='select * from 单耗')
+dian<-sqlQuery(channel=conn,query='select * from 电平衡')
+flowdata<-sqlQuery(channel=conn,query='select * from 主流程数据表')
+flow<-sqlQuery(channel=conn,query='select * from 主流程生成')
+file.remove('d:/PTS2020.xlsm')
+close(conn)
+pag<-function(wl){
+  'Column{data-width=80}'
+  cat('\n------------ \n')
+cat('\n### 天然气  \n')
+
+  cat('\n------------ \n')
+cat('\n### 天然气  \n')
+wl1<-eval(parse(text=paste0('~',wl)))
+eLine(chat,xvar=~时间,yvar=wl1)
+
+}
+
+
+```
+
+主要数据概览
+===========
+
+Column
+----------------------------------
+
+### 产出趋势
+
+
+| 名称 | 趋势 |     
+|-------|--------|
+|[天然气产量]|`r sparkline(chat$天然气产量含博元/10000, width = 320, height = 40)`|
+|[焦油0号产量]|`r sparkline(chat$焦油0号入罐量-chat$焦油0号排水, width = 320, height = 40)`|
+|[焦油1号产量]|`r sparkline(chat$焦油1号入罐量-chat$焦油1号排水, width = 320, height = 40)`|
+|[焦油2号产量]|`r sparkline(chat$焦油2号入罐量-chat$焦油2号排水, width = 320, height = 40)`|
+|[粗酚产量]|`r sparkline(chat$粗酚入罐量, width = 320, height = 40)`|
+|[含尘焦油产量]|`r sparkline(chat$含尘焦油产量, width = 320, height = 40)`|
+|[硫磺产量]|`r sparkline(chat$硫磺产量, width = 320, height = 40)`|
+|[硫酸铵产量]|`r sparkline(chat$含尘焦油产量, width = 320, height = 40)`|
+|[液氧产量]|`r sparkline(chat$液氧, width = 320, height = 40)`|
+|[液氮产量]|`r sparkline(chat$液氮, width = 320, height = 40)`|
+|[氨水产量]|`r sparkline(chat$氨水, width = 320, height = 40)`|
+|[含尘焦油产量]|`r sparkline(chat$含尘焦油产量, width = 320, height = 40)`|
+
+Column
+----------------------------------
+
+### 消耗趋势
+
+| 名称 | 趋势 |     
+|-------|-------------------|
+|[气化耗煤]|`r sparkline(chat$气化耗煤合计, width = 320, height = 40)`|
+|[动力耗煤]|`r sparkline(chat$动力耗煤合计, width = 320, height = 40)`|
+|[原水]|`r sparkline(chat$一级泵站水利局计量, width = 320, height = 40)`|
+
+### 单耗趋势
+
+| 名称 | 趋势 |     
+|-------|-------------------|
+|[气化用煤单耗]|`r sparkline(round(chat$化工煤乘热值/7000/chat$天然气产量含博元*1000,2), width = 320, height = 40)`|
+|[动力用煤单耗]|`r sparkline(round(chat$动力煤乘热值/7000/chat$天然气产量含博元*1000*293.15/273.15,2), width = 320, height = 40)`|
+|[原水单耗]|`r sparkline(round(chat$一级泵站水利局计量/chat$天然气产量含博元*1000*293.15/273.15,2), width = 320, height = 40)`|
+
+Column{data-height=100}
+----------------------------------
+
+### 库存趋势
+
+| 名称 | 趋势 |     
+|-------|-------------------|
+|[块煤库存]|`r sparkline(chat$原料煤库存, width = 320, height = 40)`|
+|[末煤库存]|`r sparkline(chat$燃料煤库存, width = 320, height = 40)`|
+|[焦油0号库存]|`r sparkline(chat$焦油0号库存, width = 320, height = 40)`|
+|[焦油1号库存]|`r sparkline(chat$焦油1号库存, width = 320, height = 40)`|
+|[焦油2号库存]|`r sparkline(chat$焦油2号库存, width = 320, height = 40)`|
+|[硫磺库存]|`r sparkline(chat$硫磺库存, width = 320, height = 40)`|
+|[硫酸铵库存]|`r sparkline(chat$硫酸铵库存, width = 320, height = 40)`|
+
+### 关于
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据看板数据来源为各中心日报表和生产管理部汇总日报表，通过R语言连接access数据库制作,看板所有图表鼠标经过时，可显示对应数据。此页点击相应超链接，可以切换到该项详细数据页面。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该数据看板尚处于测试阶段，有BUG或更好的建议，欢迎联系本人。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部门：生产管理部<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作者：樊志伟
+    
+
+天然气产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 天然气产量月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$天然气产量含博元/10000),2)
+valueBox(sm)
+```
+
+### 天然气产量年累计
+
+```{r}
+
+sm<-round(sum(chat$天然气产量含博元/10000),2)
+valueBox(sm)
+```
+
+### 天然气产量日均
+
+```{r}
+mn<-round(mean(chat$天然气产量含博元/10000),2)
+valueBox(mn)
+```
+
+### 天然气产量单日最大
+
+```{r}
+
+mx<-round(max(chat$天然气产量含博元/10000),2)
+valueBox(mx)
+```
+
+### 天然气产量单日最小
+
+```{r}
+mi<-round(min(chat$天然气产量含博元/10000),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 天然气产量日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~天然气产量含博元,type='line',ylim=c(0,5000000))
+```
+
+
+### 天然气产量月趋势
+
+```{r}
+mth<-aggregate(round(chat$天然气产量含博元/10000,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,14000))
+```
+
+液氧产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 液氧月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$液氧),2)
+valueBox(sm)
+```
+
+### 液氧年累计
+
+```{r}
+
+sm<-round(sum(chat$液氧),2)
+valueBox(sm)
+```
+
+### 液氧日均
+
+```{r}
+
+mn<-round(mean(chat$液氧),2)
+valueBox(mn)
+```
+
+### 液氧单日最大
+
+```{r}
+
+mx<-round(max(chat$液氧),2)
+valueBox(mx)
+```
+
+### 液氧单日最小
+
+```{r}
+mi<-round(min(chat$液氧),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 液氧日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~液氧,type='line',ylim=c(0,300))
+```
+
+
+### 液氧月趋势
+
+```{r}
+mth<-aggregate(round(chat$液氧,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,10000))
+```
+
+液氮产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 液氮月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$液氮),2)
+valueBox(sm)
+```
+
+### 液氮年累计
+
+```{r}
+
+sm<-round(sum(chat$液氮),2)
+valueBox(sm)
+```
+
+### 液氮日均
+
+```{r}
+
+mn<-round(mean(chat$液氮),2)
+valueBox(mn)
+```
+
+### 液氮单日最大
+
+```{r}
+
+mx<-round(max(chat$液氮),2)
+valueBox(mx)
+```
+
+### 液氮单日最小
+
+```{r}
+mi<-round(min(chat$液氮),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 液氮日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~液氮,type='line',ylim=c(0,50))
+```
+
+
+### 液氮月趋势
+
+```{r}
+mth<-aggregate(round(chat$液氮,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,300))
+```
+
+氨水产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 氨水月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$氨水),2)
+valueBox(sm)
+```
+
+### 氨水年累计
+
+```{r}
+
+sm<-round(sum(chat$氨水),2)
+valueBox(sm)
+```
+
+### 氨水日均
+
+```{r}
+
+mn<-round(mean(chat$氨水),2)
+valueBox(mn)
+```
+
+### 氨水单日最大
+
+```{r}
+
+mx<-round(max(chat$氨水),2)
+valueBox(mx)
+```
+
+### 氨水单日最小
+
+```{r}
+mi<-round(min(chat$氨水),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 氨水日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~氨水,type='line',ylim=c(0,300))
+```
+
+
+### 氨水月趋势
+
+```{r}
+mth<-aggregate(round(chat$氨水,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,10000))
+```
+
+
+粗酚产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 粗酚月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$粗酚入罐量),2)
+valueBox(sm)
+```
+
+### 粗酚年累计
+
+```{r}
+
+sm<-round(sum(chat$粗酚入罐量),2)
+valueBox(sm)
+```
+
+### 粗酚日均
+
+```{r}
+
+mn<-round(mean(chat$粗酚入罐量),2)
+valueBox(mn)
+```
+
+### 粗酚单日最大
+
+```{r}
+
+mx<-round(max(chat$粗酚入罐量),2)
+valueBox(mx)
+```
+
+### 粗酚单日最小
+
+```{r}
+mi<-round(min(chat$粗酚入罐量),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 粗酚日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~粗酚入罐量,type='line',ylim=c(0,300))
+```
+
+
+### 粗酚月趋势
+
+```{r}
+mth<-aggregate(round(chat$粗酚入罐量,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,6000))
+```
+
+
+
+含尘焦油产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 含尘焦油月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$含尘焦油产量),2)
+valueBox(sm)
+```
+
+### 含尘焦油年累计
+
+```{r}
+
+sm<-round(sum(chat$含尘焦油产量),2)
+valueBox(sm)
+```
+
+### 含尘焦油日均
+
+```{r}
+
+mn<-round(mean(chat$含尘焦油产量),2)
+valueBox(mn)
+```
+
+### 含尘焦油单日最大
+
+```{r}
+
+mx<-round(max(chat$含尘焦油产量),2)
+valueBox(mx)
+```
+
+### 含尘焦油单日最小
+
+```{r}
+mi<-round(min(chat$含尘焦油产量),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 含尘焦油日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~含尘焦油产量,type='line',ylim=c(0,300))
+```
+
+
+### 含尘焦油月趋势
+
+```{r}
+mth<-aggregate(round(chat$含尘焦油产量,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,4000))
+```
+
+
+硫磺产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 硫磺月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$硫磺产量),2)
+valueBox(sm)
+```
+
+### 硫磺年累计
+
+```{r}
+
+sm<-round(sum(chat$硫磺产量),2)
+valueBox(sm)
+```
+
+### 硫磺日均
+
+```{r}
+
+mn<-round(mean(chat$硫磺产量),2)
+valueBox(mn)
+```
+
+### 硫磺单日最大
+
+```{r}
+
+mx<-round(max(chat$硫磺产量),2)
+valueBox(mx)
+```
+
+### 硫磺单日最小
+
+```{r}
+mi<-round(min(chat$硫磺产量),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 硫磺日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~硫磺产量,type='line',ylim=c(0,100))
+```
+
+
+### 硫磺月趋势
+
+```{r}
+mth<-aggregate(round(chat$硫磺产量,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,3000))
+```
+
+
+硫酸铵产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 硫酸铵月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$硫酸铵产量),2)
+valueBox(sm)
+```
+
+### 硫酸铵年累计
+
+```{r}
+
+sm<-round(sum(chat$硫酸铵产量),2)
+valueBox(sm)
+```
+
+### 硫酸铵日均
+
+```{r}
+
+mn<-round(mean(chat$硫酸铵产量),2)
+valueBox(mn)
+```
+
+### 硫酸铵单日最大
+
+```{r}
+
+mx<-round(max(chat$硫酸铵产量),2)
+valueBox(mx)
+```
+
+### 硫酸铵单日最小
+
+```{r}
+mi<-round(min(chat$硫酸铵产量),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 硫酸铵日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~硫酸铵产量,type='line',ylim=c(-50,500))
+```
+
+
+### 硫酸铵月趋势
+
+```{r}
+mth<-aggregate(round(chat$硫酸铵产量,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,7000))
+```
+
+
+
+焦油1号产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 焦油1号月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$焦油1号入罐量-chat1$焦油1号排水),2)
+valueBox(sm)
+```
+
+### 焦油1号年累计
+
+```{r}
+
+sm<-round(sum(chat$焦油1号入罐量-chat$焦油1号排水),2)
+valueBox(sm)
+```
+
+### 焦油1号日均
+
+```{r}
+
+mn<-round(mean(chat$焦油1号入罐量-chat$焦油1号排水),2)
+valueBox(mn)
+```
+
+### 焦油1号单日最大
+
+```{r}
+
+mx<-round(max(chat$焦油1号入罐量-chat$焦油1号排水),2)
+valueBox(mx)
+```
+
+### 焦油1号单日最小
+
+```{r}
+mi<-round(min(chat$焦油1号入罐量-chat$焦油1号排水),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油1号日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油1号入罐量-焦油1号排水,type='line',ylim=c(-500,800))
+```
+
+
+### 焦油1号月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油1号入罐量-chat$焦油1号排水,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,10000))
+```
+
+焦油2号产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 焦油2号月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$焦油2号入罐量-chat1$焦油2号排水),2)
+valueBox(sm)
+```
+
+### 焦油2号年累计
+
+```{r}
+
+sm<-round(sum(chat$焦油2号入罐量-chat$焦油2号排水),2)
+valueBox(sm)
+```
+
+### 焦油2号日均
+
+```{r}
+
+mn<-round(mean(chat$焦油2号入罐量-chat$焦油2号排水),2)
+valueBox(mn)
+```
+
+### 焦油2号单日最大
+
+```{r}
+
+mx<-round(max(chat$焦油2号入罐量-chat$焦油2号排水),2)
+valueBox(mx)
+```
+
+### 焦油2号单日最小
+
+```{r}
+mi<-round(min(chat$焦油2号入罐量-chat$焦油2号排水),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油2号日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油2号入罐量-焦油2号排水,type='line',ylim=c(-600,1000))
+```
+
+
+### 焦油2号月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油2号入罐量-chat$焦油2号排水,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,10000))
+```
+
+焦油0号产量{data-navmenu="产品"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 焦油0号月累计
+
+```{r}
+
+chat1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$焦油0号入罐量-chat1$焦油0号排水),2)
+valueBox(sm)
+```
+
+### 焦油0号年累计
+
+```{r}
+
+sm<-round(sum(chat$焦油0号入罐量-chat$焦油0号排水),2)
+valueBox(sm)
+```
+
+### 焦油0号日均
+
+```{r}
+
+mn<-round(mean(chat$焦油0号入罐量-chat$焦油0号排水),2)
+valueBox(mn)
+```
+
+### 焦油0号单日最大
+
+```{r}
+
+mx<-round(max(chat$焦油0号入罐量-chat$焦油0号排水),2)
+valueBox(mx)
+```
+
+### 焦油0号单日最小
+
+```{r}
+mi<-round(min(chat$焦油0号入罐量-chat$焦油0号排水),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油0号日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油0号入罐量-焦油0号排水,type='line',ylim=c(0,300))
+```
+
+
+### 焦油0号月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油0号入罐量-chat$焦油0号排水,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,6000))
+```
+
+
+气化耗煤{data-navmenu="消耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 气化耗煤月累计
+
+```{r}
+
+sm<-round(sum(chat1$气化耗煤合计),2)
+valueBox(sm)
+```
+
+### 气化耗煤年累计
+
+```{r}
+
+sm<-round(sum(chat$气化耗煤合计),2)
+valueBox(sm)
+```
+
+### 气化耗煤日均
+
+```{r}
+
+mn<-round(mean(chat$气化耗煤合计),2)
+valueBox(mn)
+```
+
+### 气化耗煤单日最大
+
+```{r}
+
+mx<-round(max(chat$气化耗煤合计),2)
+valueBox(mx)
+```
+
+### 气化耗煤单日最小
+
+```{r}
+
+mi<-round(min(chat$气化耗煤合计),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 气化耗煤日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~气化耗煤合计,type='line',ylim=c(0,20000))
+```
+
+
+### 气化耗煤月趋势
+
+```{r}
+mth<-aggregate(round(chat$气化耗煤合计,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,500000))
+```
+
+动力耗煤{data-navmenu="消耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 动力耗煤月累计
+
+```{r}
+
+chart1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$动力耗煤合计),2)
+valueBox(sm)
+```
+
+### 动力耗煤年累计
+
+```{r}
+
+sm<-round(sum(chat$动力耗煤合计),2)
+valueBox(sm)
+```
+
+### 动力耗煤日均
+
+```{r}
+
+mn<-round(mean(chat$动力耗煤合计),2)
+valueBox(mn)
+```
+
+### 动力耗煤单日最大
+
+```{r}
+
+mx<-round(max(chat$动力耗煤合计),2)
+valueBox(mx)
+```
+
+### 动力耗煤单日最小
+
+```{r}
+
+mi<-round(min(chat$动力耗煤合计),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 动力耗煤日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~动力耗煤合计,type='line',ylim=c(0,20000))
+```
+
+
+### 动力耗煤月趋势
+
+```{r}
+mth<-aggregate(round(chat$动力耗煤合计,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,500000))
+```
+
+原水{data-navmenu="消耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+### 原水月累计
+
+```{r}
+
+chart1<-chat[month(chat$时间)==max(month(chat$时间)),]
+sm<-round(sum(chat1$一级泵站水利局计量),2)
+valueBox(sm)
+```
+
+### 原水年累计
+
+```{r}
+
+sm<-round(sum(chat$一级泵站水利局计量),2)
+valueBox(sm)
+```
+
+### 原水单日最大
+
+```{r}
+
+mx<-round(max(chat$一级泵站水利局计量),2)
+valueBox(mx)
+```
+
+### 原水单日最小
+
+```{r}
+
+mi<-round(min(chat$一级泵站水利局计量),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 原水日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~一级泵站水利局计量,type='line',ylim=c(0,50000))
+```
+
+
+### 原水月趋势
+
+```{r}
+mth<-aggregate(round(chat$一级泵站水利局计量,2),by=list(month=month(chat$时间)),FUN=sum)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,800000))
+```
+
+
+
+
+块煤库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 原料煤库存日均
+
+```{r}
+
+mn<-round(mean(chat$原料煤库存),2)
+valueBox(mn)
+```
+
+### 原料煤库存最大
+
+```{r}
+
+mx<-round(max(chat$原料煤库存),2)
+valueBox(mx)
+```
+
+### 原料煤库存单日最小
+
+```{r}
+
+mi<-round(min(chat$原料煤库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 原料煤库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~原料煤库存,type='line',ylim=c(0,300000))
+```
+
+
+### 原料煤库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$原料煤库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,300000))
+```
+
+末煤库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 燃料煤库存日均
+
+```{r}
+
+mn<-round(mean(chat$燃料煤库存),2)
+valueBox(mn)
+```
+
+### 燃料煤库存最大
+
+```{r}
+
+mx<-round(max(chat$燃料煤库存),2)
+valueBox(mx)
+```
+
+### 燃料煤库存单日最小
+
+```{r}
+
+mi<-round(min(chat$燃料煤库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 燃料煤库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~燃料煤库存,type='line',ylim=c(0,300000))
+```
+
+
+### 燃料煤库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$燃料煤库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,300000))
+```
+
+焦油0号库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 焦油0号库存日均
+
+```{r}
+
+mn<-round(mean(chat$焦油0号库存),2)
+valueBox(mn)
+```
+
+### 焦油0号库存最大
+
+```{r}
+
+mx<-round(max(chat$焦油0号库存),2)
+valueBox(mx)
+```
+
+### 焦油0号库存单日最小
+
+```{r}
+
+mi<-round(min(chat$焦油0号库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油0号库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油0号库存,type='line',ylim=c(0,2000))
+```
+
+
+### 焦油0号库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油0号库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,2000))
+```
+
+焦油1号库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 焦油1号库存日均
+
+```{r}
+
+mn<-round(mean(chat$焦油1号库存),2)
+valueBox(mn)
+```
+
+### 焦油1号库存最大
+
+```{r}
+
+mx<-round(max(chat$焦油1号库存),2)
+valueBox(mx)
+```
+
+### 焦油1号库存单日最小
+
+```{r}
+
+mi<-round(min(chat$焦油1号库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油1号库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油1号库存,type='line',ylim=c(0,5000))
+```
+
+
+### 焦油1号库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油1号库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,5000))
+```
+
+焦油2号库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 焦油2号库存日均
+
+```{r}
+
+mn<-round(mean(chat$焦油2号库存),2)
+valueBox(mn)
+```
+
+### 焦油2号库存最大
+
+```{r}
+
+mx<-round(max(chat$焦油2号库存),2)
+valueBox(mx)
+```
+
+### 焦油2号库存单日最小
+
+```{r}
+
+mi<-round(min(chat$焦油2号库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油2号库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~焦油2号库存,type='line',ylim=c(0,8000))
+```
+
+
+### 焦油2号库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$焦油2号库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,8000))
+```
+
+粗酚库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 粗酚库存日均
+
+```{r}
+
+mn<-round(mean(chat$粗酚库存),2)
+valueBox(mn)
+```
+
+### 粗酚库存最大
+
+```{r}
+
+mx<-round(max(chat$粗酚库存),2)
+valueBox(mx)
+```
+
+### 粗酚库存单日最小
+
+```{r}
+
+mi<-round(min(chat$粗酚库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 粗酚库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~粗酚库存,type='line',ylim=c(0,5000))
+```
+
+
+### 粗酚库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$粗酚库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,5000))
+```
+
+硫磺库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 硫磺库存日均
+
+```{r}
+
+mn<-round(mean(chat$硫磺库存),2)
+valueBox(mn)
+```
+
+### 硫磺库存最大
+
+```{r}
+
+mx<-round(max(chat$硫磺库存),2)
+valueBox(mx)
+```
+
+### 硫磺库存单日最小
+
+```{r}
+
+mi<-round(min(chat$硫磺库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 硫磺库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~硫磺库存,type='line',ylim=c(0,3000))
+```
+
+
+### 硫磺库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$硫磺库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,3000))
+```
+
+硫酸铵库存{data-navmenu="库存"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 硫酸铵库存日均
+
+```{r}
+
+mn<-round(mean(chat$硫酸铵库存),2)
+valueBox(mn)
+```
+
+### 硫酸铵库存最大
+
+```{r}
+
+mx<-round(max(chat$硫酸铵库存),2)
+valueBox(mx)
+```
+
+### 硫酸铵库存单日最小
+
+```{r}
+
+mi<-round(min(chat$硫酸铵库存),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 硫酸铵库存日趋势
+
+
+```{r}
+
+eLine(chat,xvar=~时间,yvar=~硫酸铵库存,type='line',ylim=c(0,3000))
+```
+
+
+### 硫酸铵库存月趋势
+
+```{r}
+mth<-aggregate(round(chat$硫酸铵库存,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(mth,xvar=~month,yvar=~x,ylim=c(0,3000))
+```
+
+气化用煤单耗{data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 化工标煤单耗日均
+
+```{r}
+coal<-na.omit(data.frame(日期=chat$时间,单耗=round(chat$化工煤乘热值/7000/chat$天然气产量含博元*1000*293.15/273.15,2)))
+mn<-round(sum(chat$化工煤乘热值/7000)/sum(chat$天然气产量含博元)*1000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 化工标煤单耗最大
+
+```{r}
+
+mx<-round(max(coal$单耗[coal$单耗<10]),2)
+valueBox(mx)
+```
+
+### 化工标煤单耗最小
+
+```{r}
+
+mi<-round(min(coal$单耗),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 化工标煤单耗日趋势
+
+
+```{r}
+
+eLine(coal,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,3))
+```
+
+
+### 化工标煤单耗月趋势
+
+```{r}
+eBar(dh,xvar=~月份,yvar=~化工煤单耗,ylim=c(0,4))
+```
+
+动力用煤单耗{data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 动力标煤单耗日均
+
+```{r}
+coal<-na.omit(data.frame(日期=chat$时间,单耗=round(chat$动力煤乘热值/7000/chat$天然气产量含博元*1000*293.15/273.15,2)))
+mn<-round(sum(chat$动力煤乘热值/7000)/sum(chat$天然气产量含博元)*1000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 动力标煤单耗最大
+
+```{r}
+
+mx<-round(max(coal$单耗[coal$单耗<10]),2)
+valueBox(mx)
+```
+
+### 动力标煤单耗最小
+
+```{r}
+
+mi<-round(min(coal$单耗[coal$单耗>=0]),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 动力标煤单耗日趋势
+
+
+```{r}
+
+eLine(coal,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,2))
+```
+
+
+### 动力标煤单耗月趋势
+
+```{r}
+eBar(dh,xvar=~月份,yvar=~动力煤单耗,ylim=c(0,2))
+```
+
+含尘焦油副产率(千克/千标方){data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 含尘焦油副产率日均
+
+```{r}
+water<-na.omit(data.frame(日期=chat$时间,单耗=round(chat$含尘焦油产量/chat$天然气产量含博元*1000000*293.15/273.15,2)))
+mn<-round(sum(chat$含尘焦油产量)/sum(chat$天然气产量含博元)*1000000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 含尘焦油副产率最大
+
+```{r}
+
+mx<-round(max(water$单耗[water$单耗<10000]),2)
+valueBox(mx)
+```
+
+### 含尘焦油副产率最小
+
+```{r}
+mi<-round(min(water$单耗[water$单耗>=0]),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 含尘焦油副产率日趋势
+
+
+```{r}
+
+eLine(water,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,100))
+```
+
+
+### 含尘焦油副产率月趋势
+
+```{r}
+eBar(dh,xvar=~月份,yvar=~含尘焦油,ylim=c(0,50))
+```
+
+原水单耗{data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 原水单耗日均
+
+```{r}
+chat1<-sqldf('select * from chat where 天然气产量含博元>0')
+water<-data.frame(日期=chat1$时间,单耗=round(chat1$一级泵站水利局计量/chat1$天然气产量含博元*1000*293.15/273.15,2))
+mn<-round(sum(chat1$一级泵站水利局计量)/sum(chat1$天然气产量含博元)*1000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 原水单耗最大
+
+```{r}
+
+mx<-round(max(water$单耗[water$单耗<10000]),2)
+valueBox(mx)
+```
+
+### 原水单耗最小
+
+```{r}
+
+mi<-round(min(water$单耗[water$单耗>0]),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 原水单耗日趋势
+
+
+```{r}
+
+eLine(water,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,10))
+```
+
+
+### 原水单耗月趋势
+
+```{r}
+eBar(dh,xvar=~月份,yvar=~原水单耗,ylim=c(0,14))
+
+```
+
+
+
+焦油1号副产率(千克/千标方){data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 焦油1号副产率日均
+
+```{r}
+chat1<-sqldf('select * from chat where 天然气产量含博元>0')
+water<-data.frame(日期=chat1$时间,单耗=round((chat1$焦油1号入罐量-chat1$焦油1号排水)/chat1$天然气产量含博元*1000000*293.15/273.15,2))
+mn<-round(sum((chat1$焦油1号入罐量-chat1$焦油1号排水))/sum(chat1$天然气产量含博元)*1000000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 焦油1号副产率最大
+
+```{r}
+
+mx<-round(max(water$单耗),2)
+valueBox(mx)
+```
+
+### 焦油1号副产率最小
+
+```{r}
+
+mi<-round(min(water$单耗),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油1号副产率日趋势
+
+
+```{r}
+
+eLine(water,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,150))
+```
+
+
+### 焦油1号副产率月趋势
+
+```{r}
+eBar(dh,xvar=~月份,yvar=~焦油一号,ylim=c(-50,100))
+```
+
+焦油2号副产率(千克/千标方){data-navmenu="单耗"}
+===========
+
+Column{data-width=80}
+----------------------------------
+
+
+
+### 焦油2号副产率日均
+
+```{r}
+chat1<-sqldf('select * from chat where 天然气产量含博元>0')
+water<-data.frame(日期=chat1$时间,单耗=round((chat1$焦油2号入罐量-chat1$焦油2号排水)/chat1$天然气产量含博元*1000000*293.15/273.15,2))
+mn<-round(sum((chat1$焦油2号入罐量-chat1$焦油2号排水))/sum(chat1$天然气产量含博元)*1000000*293.15/273.15,2)
+valueBox(mn)
+```
+
+### 焦油2号副产率最大
+
+```{r}
+
+mx<-round(max(water$单耗[water$单耗<10000]),2)
+valueBox(mx)
+```
+
+### 焦油2号副产率最小
+
+```{r}
+
+mi<-round(min(water$单耗[water$单耗>=0]),2)
+valueBox(mi)
+```
+
+Column
+-------------------------------------------------------------------------------------------------
+
+### 焦油2号副产率日趋势
+
+
+```{r}
+
+eLine(water,xvar=~日期,yvar=~单耗,type='line',ylim=c(0,150))
+```
+
+
+### 焦油2号副产率月趋势
+
+```{r}
+mth<-aggregate(round((chat$焦油2号入罐量-chat$焦油2号排水)/chat$天然气产量含博元*1000000*293.15/273.15,2),by=list(month=month(chat$时间)),FUN=mean)
+eBar(dh,xvar=~月份,yvar=~焦油二号,ylim=c(-50,200))
+```
+
+电平衡{data-navmenu="平衡图基于现有流量计"}
+======================
+
+### 电平衡桑吉图
+
+```{r}
+for (i in 1:8){
+  chat2<-chat[which(month(chat$时间)==i),]
+  dat=data.frame(source=c('外购电关口','发电','电系统','电系统','电系统','化工','化工','化工','化工','化工','化工','化工','化工','化工','化工'),
+                target=c('电系统','电系统','上网电','化工','动力','空分','气化','净化','甲烷化','环境','储运','中控','机修','厂前区','博元'),
+                value=c(sum(chat2$外购电量/10000),sum(chat2$发电量/10000),sum(chat2$上网电量/10000),sum(chat2$化工用电量/10000),sum(chat2$动力厂用电量/10000),sum(chat2$空分用电),sum(chat2$气化用电),sum(chat2$净化用电),sum(chat2$甲烷化用电),sum(chat2$环境用电),sum(chat2$储运用电),sum(chat2$中控用电),sum(chat2$机修用电),sum(chat2$厂前区用电),sum(chat2$赤峰博元用电)))
+assign(paste0('e', i),eSankey(dat,title=paste0(i,'月电平衡图')))}
+eTimeline(e1,e2,e3,e4,e5,e6,e7,e8)
+
+
+```
+
+
+
+
+
+水平衡{data-navmenu="平衡图基于现有流量计"}
+======================
+
+
+
+```{r}
+for (i in 1:8){
+  chat2<-chat[which(month(chat$时间)==i),]
+dat=data.frame(source=c('原水','污水回用反渗透','浓盐水反渗透','综合水池','综合水池','生产水','生产水','生产水','生产水','化学水','化学水'),
+                target=c('综合水池','综合水池','综合水池','生产水','生活水','化学水','空分循环水','工艺净循环水','浊循环水','化工','动力'),
+                value=c(sum(chat2$一级泵站水利局计量/10000),sum(chat2$反渗透水池外送回用水/10000),sum(chat2$浓盐水系统回综合水池回用水/10000),sum(chat2$生产水泵出口/10000),sum(chat2$生活水出水/10000),sum(chat2$化学制水用生产水/10000),sum(chat2$空分循环水补水/10000),sum(chat2$工艺净循环水补水/10000),sum(chat2$煤气净化循环水补新鲜水/10000),sum(chat2$除盐水送化工/10000),sum(chat2$除盐水送动力/10000)))
+assign(paste0('e', i),eSankey(dat,title=paste0(i,'月水平衡图')))}
+eTimeline(e1,e2,e3,e4,e5,e6,e7,e8)
+
+```
+
+蒸汽平衡{data-navmenu="平衡图基于现有流量计"}
+======================
+
+
+
+```{r}
+for (i in 7:8){
+   chat2<-chat[which(month(chat$时间)==i),]
+   qh1<-qh[which(month(qh$气化时间)==i & qh$空分消耗88MPa蒸汽>=0),]
+    hc1<-hc[which(month(hc$合成时间 )==i & hc$粗煤气>=0),]
+       dl1<-dl[which(month(dl$动力时间)==i & dl$高压蒸汽>=0),]
+          
+dat=data.frame(source=c('动力','高压蒸汽送化工','高压蒸汽送化工','高压蒸汽送化工','动力','甲烷化','硫回收','中压蒸汽','中压蒸汽','中压蒸汽','中压蒸汽','动力','次中压蒸汽','次中压蒸汽','动力','气化','煤气水分离','变换','硫回收','低压蒸汽','低压蒸汽','低压蒸汽','低压蒸汽','低压蒸汽'),
+                target=c('高压蒸汽送化工','空分','丙烯','首站','中压蒸汽','中压蒸汽','中压蒸汽','气化','酚回收','首站','博元','次中压蒸汽','空分','酚回收','低压蒸汽','低压蒸汽','低压蒸汽','低压蒸汽','低压蒸汽','动力脱硫','酚回收','除氧站','低甲','博元'),
+                value=c(sum(dl1$高压蒸汽),sum(qh1$空分消耗88MPa蒸汽),sum(hc1$丙烯压缩高压蒸汽),sum(hc1$首站高压蒸汽),sum(dl1$中压蒸汽),sum(hc1$甲烷化中压蒸汽),sum(hc1$硫回收中压蒸汽),sum(qh1$气化耗中压蒸汽),sum(qh1$酚回收耗中压蒸汽),sum(hc1$首站中压蒸汽),sum(chat2$博元55公斤蒸汽),sum(dl1$次中压蒸汽),sum(qh1$空分消耗次中压蒸汽),sum(qh1$酚回收耗次中压蒸汽),sum(dl1$低压蒸汽),sum(qh1$气化低压蒸汽),sum(qh1$煤气水分离产低压蒸汽),sum(hc1$变换低压蒸汽),sum(hc1$硫回收低压蒸汽),sum(dl1$脱硫用低压蒸汽),sum(qh1$酚回收耗低压蒸汽),sum(hc1$除氧站低压蒸汽),sum(hc1$低甲低压蒸汽),sum(chat2$博元5公斤蒸汽)))
+assign(paste0('e', i),eSankey(dat,title=paste0(i,'月蒸汽平衡图')))}
+eTimeline(e7,e8)
+```
+
+
+低压氮气平衡{data-navmenu="平衡图基于现有流量计"}
+======================
+
+```{r}
+for (i in 7:8){
+   chat2<-chat[which(month(chat$时间)==i),]
+   qh1<-qh[which(month(qh$气化时间)==i & qh$空分消耗88MPa蒸汽>=0),]
+    hc1<-hc[which(month(hc$合成时间 )==i & hc$粗煤气>=0),]
+       dl1<-dl[which(month(dl$动力时间)==i & dl$高压蒸汽>=0),]
+dat=data.frame(source=c('空分','低压氮气','低压氮气','低压氮气','低压氮气','低压氮气','低压氮气'),
+                target=c('低压氮气','加压气化','煤气水分离','低甲','甲烷化','硫回收','博元'),
+                value=c(sum(qh1$空分产出氮气),sum(qh1$气化耗低压氮气),sum(qh1$煤气水分离耗低压氮气),sum(hc1$低甲低压氮气),sum(hc1$甲烷化低压氮气),sum(hc1$硫回收低压氮气),sum(chat2$博元氮气)))
+eSankey(dat,title='低压氮气平衡图')
+assign(paste0('e', i),eSankey(dat,title=paste0(i,'月低压氮气平衡图')))}
+eTimeline(e7,e8)
+```
+
+主流程{data-navmenu="流程图"}
+======================================
+
+```{r}
+library(visNetwork)
+nodes <- data.frame(id=flowdata$ID, label=flowdata$label,shape='box',title=flowdata$title)
+x<-flow$label
+edges <-data.frame(from=flow$from,to=flow$to,label=sapply(x,  function(x) eval(parse(text = x))),arrows='to')
+
+visNetwork(nodes, edges, width ='100%',title='主流程全年小时平均')
+
+
+``` 
+
+
